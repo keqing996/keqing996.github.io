@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":false,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="目标是搭建一个不带前端主流框架的electron环境，也就是没有vue和react等。包含的主流组件为： - Electron自不必说 - Electron-forge来打包（packager或者builder也都可以，一样的） - Typescript，用TypeScript有两个原因，首先当然是TypeScript好使，其次是，Electron至今都不能很好的支持ESM，因此直接写js的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Electron基础环境搭建">
+<meta property="og:url" content="http://example.com/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/index.html">
+<meta property="og:site_name" content="Noemie">
+<meta property="og:description" content="目标是搭建一个不带前端主流框架的electron环境，也就是没有vue和react等。包含的主流组件为： - Electron自不必说 - Electron-forge来打包（packager或者builder也都可以，一样的） - Typescript，用TypeScript有两个原因，首先当然是TypeScript好使，其次是，Electron至今都不能很好的支持ESM，因此直接写js的">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/3425324.png">
+<meta property="og:image" content="http://example.com/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/7542345.png">
+<meta property="og:image" content="http://example.com/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/7685345.png">
+<meta property="og:image" content="http://example.com/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/1234553.png">
+<meta property="og:image" content="http://example.com/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/84567564.png">
+<meta property="og:image" content="http://example.com/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/45673456.png">
+<meta property="og:image" content="http://example.com/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/435777.png">
+<meta property="og:image" content="http://example.com/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/12345333.png">
+<meta property="og:image" content="http://example.com/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/8867564.png">
+<meta property="article:published_time" content="2023-01-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-18T03:25:35.896Z">
+<meta property="article:author" content="NoemieGrf">
+<meta property="article:tag" content="TypeScript">
+<meta property="article:tag" content="Electron">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/3425324.png">
+
+
+<link rel="canonical" href="http://example.com/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/","path":"2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/","title":"Electron基础环境搭建"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Electron基础环境搭建 | Noemie</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Noemie</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-%E5%AE%89%E8%A3%85%E5%90%84%E7%A7%8Dnode%E5%8C%85"><span class="nav-number">1.</span> <span class="nav-text">一 安装各种node包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-%E8%AE%A9%E6%B5%81%E7%A8%8B%E8%B7%91%E8%B5%B7%E6%9D%A5"><span class="nav-number">2.</span> <span class="nav-text">二 让流程跑起来</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEtsconfig"><span class="nav-number">2.1.</span> <span class="nav-text">2 配置tsconfig</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEwebpack"><span class="nav-number">2.2.</span> <span class="nav-text">3 配置webpack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E6%95%B4%E5%85%A5%E5%8F%A3%E8%BF%90%E8%A1%8C"><span class="nav-number">2.3.</span> <span class="nav-text">4 调整入口，运行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-%E6%89%93%E5%8C%85"><span class="nav-number">3.</span> <span class="nav-text">三 打包</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">NoemieGrf</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/noemiegrf" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;noemiegrf" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="NoemieGrf">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Noemie">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Electron基础环境搭建 | Noemie">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Electron基础环境搭建
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-01-15 00:00:00" itemprop="dateCreated datePublished" datetime="2023-01-15T00:00:00+08:00">2023-01-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/TypeScript/" itemprop="url" rel="index"><span itemprop="name">TypeScript</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>目标是搭建一个不带前端主流框架的electron环境，也就是没有vue和react等。包含的主流组件为：
+- Electron自不必说 -
+Electron-forge来打包（packager或者builder也都可以，一样的） -
+Typescript，用TypeScript有两个原因，首先当然是TypeScript好使，其次是，Electron至今都不能很好的支持ESM，因此直接写js的话，在包的引入上需要用require，但是如果require的包又是es语法用了export或者import，就会报错（比如echarts的引入），非常难受。因此用Typescript写，把target设置成commonjs来转一手。
+- webpack，打包用。</p>
+<p>在空文件夹下，首先npm init。生成package.json。 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm init</span><br></pre></td></tr></table></figure>
+<img src="/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/3425324.png" class=""></p>
+<h1 id="一-安装各种node包">一 安装各种node包</h1>
+<p>首先是electron。会自动创建node_modules和package-lock.json。
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev electron</span><br></pre></td></tr></table></figure> <img src="/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/7542345.png" class=""> 接下里，安装webpack。 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev webpack webpack-cli webpack-merge webpack-node-externals</span><br></pre></td></tr></table></figure>
+注意需要安装一下webpack-merge，因为electron需要单独打包主进程和泫然进程，一些共用的配置会拿出来，需要webpack-merge帮忙合并。webpack-node-externals用来在打包过程中排除掉node_modules。
+接下来，安装typescript。 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev typescript</span><br></pre></td></tr></table></figure>
+以及需要用到的typescript的扩展。这些是为了引入对应的类型，让typescript正确识别不报错。
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev @types/node @types/webpack</span><br></pre></td></tr></table></figure>
+过去还需要@types/electron，但是现在electron自带了，就不需要了。
+接下来是webpack打包过程的一些loader。 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev css-loader file-loader node-loader style-loader ts-loader</span><br></pre></td></tr></table></figure> 其中： -
+css-loader+style-loader：解决css打包 -
+node-loader：解决native的node文件打包 -
+ts-loader：解决typescript文件打包 -
+file-loader：解决其他乱七八糟文件打包
+接下里是webpack打包过程中用来打包html的plugin。 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev html-webpack-plugin</span><br></pre></td></tr></table></figure>
+不打包的话，上面这些就够了。</p>
+<h1 id="二-让流程跑起来">二 让流程跑起来</h1>
+<p>流程上是这样，在src目录下，用ts+html+css把electron正常的主进程和渲染进程逻辑写好。然后用一揽子的webpack配置把他们生成到dist目录，最后把package.json中的入口调整为dist下编译出来的js文件。除了dist文件以外，其他的文件包括src，在打包的时候都不需要。
+## 1 基础逻辑文件 首先创建如下的文件目录。 <img src="/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/7685345.png" class="">
+在main.ts里写主进程的逻辑，就是官方文档中标准写法的ts版本。
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">BrowserWindow</span>, app, ipcMain &#125; <span class="keyword">from</span> <span class="string">&#x27;electron&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> path <span class="keyword">from</span> <span class="string">&quot;path&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="attr">mainWindow</span>: <span class="title class_">BrowserWindow</span> | <span class="literal">null</span> = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createMainWindow</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (mainWindow)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    mainWindow = <span class="keyword">new</span> <span class="title class_">BrowserWindow</span>(&#123;</span><br><span class="line">        <span class="attr">webPreferences</span>: &#123;</span><br><span class="line">            <span class="comment">// 打开这选项，可以在渲染进程使用node</span></span><br><span class="line">            <span class="comment">// 否则就只能在主进程使用node，所有消息靠进程间通信实现</span></span><br><span class="line">            <span class="comment">// 但是electron官方非常不推荐，这样不太安全</span></span><br><span class="line">            <span class="attr">nodeIntegration</span>: <span class="literal">true</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">height</span>: <span class="number">800</span>,</span><br><span class="line">        <span class="attr">width</span>: <span class="number">1600</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这里的路径其实是webpack生成之后的指向路径，保持生成前后名字不变的话，就还好</span></span><br><span class="line">    mainWindow.<span class="title function_">loadFile</span>(path.<span class="title function_">resolve</span>(__dirname, <span class="string">`../render/index.html`</span>));</span><br><span class="line">    mainWindow.<span class="title function_">on</span>(<span class="string">&#x27;close&#x27;</span>, <span class="function">() =&gt;</span> mainWindow = <span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">    mainWindow.<span class="property">webContents</span>.<span class="title function_">openDevTools</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">on</span>(<span class="string">&#x27;ready&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">createMainWindow</span>();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">on</span>(<span class="string">&#x27;window-all-closed&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (process.<span class="property">platform</span> !== <span class="string">&#x27;darwin&#x27;</span>) &#123;</span><br><span class="line">        app.<span class="title function_">quit</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.<span class="title function_">on</span>(<span class="string">&#x27;activate&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">createMainWindow</span>();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure> 接下来是index.html，随便写点。 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>ElectronApp<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello Electron<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>一个幽灵，共产主义的幽灵，在欧洲游荡。为了对这个幽灵进行神圣的围剿，旧欧洲的一切势力，教皇和沙皇、梅特涅和基佐、法国的激进派和德国的警察，都联合起来了。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+注意这里不要插入render.js，webpack打包会帮忙插入。
+接下来是css，随便写点。 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: blueviolet;</span><br><span class="line">    <span class="attribute">text-align</span>:center;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: brown;</span><br><span class="line">    <span class="attribute">font-family</span>:<span class="string">&quot;Times New Roman&quot;</span>;</span><br><span class="line">    <span class="attribute">font-size</span>:<span class="number">20px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 最后是render.ts。 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;./style.css&#x27;</span> <span class="comment">// 引入一下让webpack识别到来打包</span></span><br></pre></td></tr></table></figure>
+这里是后续写业务逻辑的地方，只是基础环境的话，这里什么都不做，但是一定要写上上面这句话。没有这句话，webpack打包无法正确引入这个css。</p>
+<h2 id="配置tsconfig">2 配置tsconfig</h2>
+<p>直接根目录创建一个tsconfig.json，或者用下面的命令行创建一个。
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tsc init</span><br></pre></td></tr></table></figure>
+配置一下typescript的编译，具体含义就不一一解释了，可以参考typescript的文档。
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;compilerOptions&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;target&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ES2018&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;module&quot;</span><span class="punctuation">:</span> <span class="string">&quot;CommonJS&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;lib&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="string">&quot;dom&quot;</span><span class="punctuation">,</span> <span class="string">&quot;esnext&quot;</span> <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;strict&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;noImplicitReturns&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;moduleResolution&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Node&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;esModuleInterop&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;allowSyntheticDefaultImports&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;allowJs&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;resolveJsonModule&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;exclude&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="string">&quot;node_modules&quot;</span> <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;include&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span> <span class="string">&quot;src/main&quot;</span><span class="punctuation">,</span> <span class="string">&quot;src/renderer&quot;</span> <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="配置webpack">3 配置webpack</h2>
+<p>webpack需要单独配置主进程和渲染进程，一些共同的配置单独抽一个js，然后用merge来结合。
+首先根目录创建webpack.base.config.js，写一些基本的规则。 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;  </span><br><span class="line">    <span class="attr">module</span>: &#123;  </span><br><span class="line">        <span class="attr">rules</span>: [  </span><br><span class="line">            <span class="comment">// typescript  </span></span><br><span class="line">            &#123;  </span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.ts$/</span>,  </span><br><span class="line">                <span class="attr">use</span>: <span class="string">&#x27;ts-loader&#x27;</span>,  </span><br><span class="line">                <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>  </span><br><span class="line">            &#125;,  </span><br><span class="line">            <span class="comment">// css (style loader在前 css loader在后)  </span></span><br><span class="line">            &#123;  </span><br><span class="line">                <span class="attr">test</span>:<span class="regexp">/\.css$/</span>,  </span><br><span class="line">                <span class="attr">use</span>: [ <span class="string">&#x27;style-loader&#x27;</span>, <span class="string">&#x27;css-loader&#x27;</span>],  </span><br><span class="line">                <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>  </span><br><span class="line">            &#125;,  </span><br><span class="line">            <span class="comment">// .node native (这里例子中用不到)</span></span><br><span class="line">            &#123;  </span><br><span class="line">                <span class="attr">test</span>: <span class="regexp">/\.node$/</span>,  </span><br><span class="line">                <span class="attr">exclude</span>: <span class="regexp">/node_modules/</span>,  </span><br><span class="line">                <span class="attr">use</span>: <span class="string">&#x27;node-loader&#x27;</span>   </span><br><span class="line">			&#125;  </span><br><span class="line">        ]  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+接下里写主进程的webpack配置，根目录新建文件webpack.main.config.js，内容如下。把输出目录设置为dist（目前没有，一会会自动生成）。
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);  </span><br><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">&#x27;webpack&#x27;</span>);  </span><br><span class="line"><span class="keyword">const</span> &#123; merge &#125; = <span class="built_in">require</span>(<span class="string">&#x27;webpack-merge&#x27;</span>);  </span><br><span class="line"><span class="keyword">const</span> nodeExternals = <span class="built_in">require</span>(<span class="string">&#x27;webpack-node-externals&#x27;</span>);  </span><br><span class="line"><span class="keyword">const</span> webpackBaseConfig = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.base.config&#x27;</span>);  </span><br><span class="line">  </span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title function_">merge</span>(webpackBaseConfig, &#123;  </span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>,  </span><br><span class="line">    <span class="attr">target</span>: <span class="string">&#x27;node&#x27;</span>,  </span><br><span class="line">    <span class="attr">entry</span>: path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;src/main/main.ts&#x27;</span>),  </span><br><span class="line">    <span class="attr">output</span>: &#123;  </span><br><span class="line">	    <span class="comment">// 注意输出目录</span></span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;dist/main&#x27;</span>),  </span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;main.js&#x27;</span>  </span><br><span class="line">    &#125;,  </span><br><span class="line">    <span class="attr">externals</span>: [<span class="title function_">nodeExternals</span>()],  </span><br><span class="line">    <span class="attr">plugins</span>: [  </span><br><span class="line">        <span class="keyword">new</span> webpack.<span class="title class_">EnvironmentPlugin</span>(&#123;  </span><br><span class="line">            <span class="attr">NODE_ENV</span>: <span class="string">&#x27;development&#x27;</span>  </span><br><span class="line">        &#125;)  </span><br><span class="line">    ],  </span><br><span class="line">    <span class="attr">node</span>: &#123;  </span><br><span class="line">        <span class="attr">__dirname</span>: <span class="literal">false</span>,  </span><br><span class="line">        <span class="attr">__filename</span>: <span class="literal">false</span>  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+接下来是渲染进程，文件webpack.render.config.js。内容和main的差不多，多一个html的插件。
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">&#x27;webpack&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; merge &#125; = <span class="built_in">require</span>(<span class="string">&#x27;webpack-merge&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="title class_">HtmlWebpackPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> webpackBaseConfig = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.base.config&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title function_">merge</span>(webpackBaseConfig, &#123;</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>,</span><br><span class="line">    <span class="attr">target</span>: <span class="string">&#x27;electron-renderer&#x27;</span>,</span><br><span class="line">    <span class="attr">entry</span>: path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;src/render/render.ts&#x27;</span>),</span><br><span class="line">    <span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;dist/render&#x27;</span>),</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;render.js&#x27;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="keyword">new</span> webpack.<span class="title class_">EnvironmentPlugin</span>(&#123;</span><br><span class="line">            <span class="attr">NODE_ENV</span>: <span class="string">&#x27;development&#x27;</span></span><br><span class="line">        &#125;),</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">HtmlWebpackPlugin</span>(&#123;</span><br><span class="line">            <span class="attr">inject</span>: <span class="string">&#x27;body&#x27;</span>,</span><br><span class="line">            <span class="attr">scriptLoading</span>: <span class="string">&#x27;defer&#x27;</span>,</span><br><span class="line">            <span class="attr">minify</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">filename</span>: <span class="string">&#x27;index.html&#x27;</span>,</span><br><span class="line">            <span class="attr">template</span>: path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;src/render/index.html&#x27;</span>)</span><br><span class="line">        &#125;),</span><br><span class="line">    ],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+最后一步，配置package.json的入口，让webpack可以run起来。在package.json里增加：
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;webpack-main&quot;</span><span class="punctuation">:</span> <span class="string">&quot;webpack --config webpack.main.config.js&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;webpack-render&quot;</span><span class="punctuation">:</span> <span class="string">&quot;webpack --config webpack.render.config.js&quot;</span></span><br></pre></td></tr></table></figure>
+两个命令分别用webpack生成主进程和渲染进程。接下来试一试，在命令行里分别输入：
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm run webpack-main</span><br><span class="line">npm run webpack-render</span><br></pre></td></tr></table></figure> 都成功的话，可以看到生成的dist目录。 <img src="/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/1234553.png" class=""></p>
+<h2 id="调整入口运行">4 调整入口，运行</h2>
+<p>在package.json中把main调整为dist的生成js。并且在脚本中增加一个electron运行。
+<img src="/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/84567564.png" class=""> 在命令行输入下面的命令来运行electron。 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm start</span><br></pre></td></tr></table></figure>
+一切顺利的话，就可以看到界面了（下面的截图左侧是当前的文件结构，方便对照）。console会有一个warning，因为在主进程起BrowserWindow的时候，设置了nodeIntegration，官方认为这样不安全，因为会报warning。如果不是对外发布app的话，无视就好。如果是对用户的正式app，推荐还是按官方的做法做。主进程跑逻辑，ipc通知渲染进程更新。
+<img src="/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/45673456.png" class=""></p>
+<h1 id="三-打包">三 打包</h1>
+<p>electron-forge是官方提供的一个打包工具（其实就是electron-packager套壳）。首先安装一下。
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev @electron-forge/cli</span><br></pre></td></tr></table></figure> 接下来执行下面这句话，让forge自动配置一下项目。
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm exec --package=@electron-forge/cli -c &quot;electron-forge import&quot;</span><br></pre></td></tr></table></figure> 它会做三个事情。 一个是帮忙装上其他的forge依赖。
+<img src="/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/435777.png" class="">
+二是改动start入口，从forge进入，以及帮忙生成另外两个打包的入口。
+<img src="/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/12345333.png" class="">
+三是生成一个打包配置文件forge.config.js。打开这个文件，做一些基础改动。
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;  </span><br><span class="line">  <span class="attr">packagerConfig</span>: &#123;  </span><br><span class="line">    <span class="attr">appVersion</span>: <span class="string">&quot;1.0.0&quot;</span>,  </span><br><span class="line">    <span class="attr">platform</span>: <span class="string">&quot;win32&quot;</span>,  </span><br><span class="line">    <span class="attr">name</span>: <span class="string">&quot;BaseElectronEnv&quot;</span>,   </span><br><span class="line">    <span class="attr">asar</span>: <span class="literal">true</span>,  </span><br><span class="line">    <span class="attr">ignore</span>:[  </span><br><span class="line">        <span class="string">&quot;src&quot;</span>,  </span><br><span class="line">        <span class="string">&quot;node_modules&quot;</span>,  </span><br><span class="line">        <span class="string">&quot;forge.config.js&quot;</span>,  </span><br><span class="line">        <span class="string">&quot;tsconfig.json&quot;</span>,</span><br><span class="line">        <span class="string">&quot;webpack.base.config.js&quot;</span>,  </span><br><span class="line">        <span class="string">&quot;webpack.main.config.js&quot;</span>,  </span><br><span class="line">        <span class="string">&quot;webpack.render.config.js&quot;</span>,  </span><br><span class="line">    ],  </span><br><span class="line">    win32metadata :&#123;  </span><br><span class="line">      <span class="title class_">ProductName</span>: <span class="string">&quot;BaseElectronEnv&quot;</span>,  </span><br><span class="line">      <span class="title class_">FileDescription</span>: <span class="string">&quot;Base Electron Env&quot;</span>  </span><br><span class="line">    &#125;  </span><br><span class="line">  &#125;,  </span><br><span class="line">  <span class="attr">rebuildConfig</span>: &#123;&#125;,  </span><br><span class="line">  <span class="attr">makers</span>: [  </span><br><span class="line">	<span class="comment">// 随便写两个例子</span></span><br><span class="line">    &#123;  </span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;@electron-forge/maker-squirrel&#x27;</span>,  </span><br><span class="line">      <span class="attr">config</span>: &#123;&#125;,  </span><br><span class="line">    &#125;,  </span><br><span class="line">    &#123;  </span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;@electron-forge/maker-zip&#x27;</span>,  </span><br><span class="line">      <span class="attr">config</span>: &#123;&#125;,  </span><br><span class="line">    &#125;  </span><br><span class="line">  ],  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> 参数就不详细解释了。可以先npm
+start一下确认可以正常启动。接下里依次输入（记得package.json中的Auther和Description要写一下，否则打不出来）。
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm run package</span><br><span class="line">npm run make</span><br></pre></td></tr></table></figure> 就完成打包了。输出在根目录的out文件夹。
+<img src="/2023/01/15/BuildElectronBaseEnv/ElectronBaseEnv/8867564.png" class=""></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/TypeScript/" rel="tag"># TypeScript</a>
+              <a href="/tags/Electron/" rel="tag"># Electron</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/10/16/Arm64OnAndroid/Arm64OnAndroid/" rel="next" title="Android上使用Arm64汇编">
+                  Android上使用Arm64汇编 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">NoemieGrf</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
