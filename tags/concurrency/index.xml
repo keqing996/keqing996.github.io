@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Concurrency on BlueHour</title>
+    <link>https://keqing996.github.io/tags/concurrency/</link>
+    <description>Recent content in Concurrency on BlueHour</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 21 Apr 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://keqing996.github.io/tags/concurrency/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lock-Free Programming</title>
+      <link>https://keqing996.github.io/posts/programming/20230421_lockfree/</link>
+      <pubDate>Fri, 21 Apr 2023 00:00:00 +0000</pubDate>
+      <guid>https://keqing996.github.io/posts/programming/20230421_lockfree/</guid>
+      <description>&lt;h1 id=&#34;lock-free-programming&#34;&gt;Lock-Free Programming&lt;/h1&gt;
+&lt;p&gt;The goal of lock-free programming is not to make synchronization &amp;ldquo;free&amp;rdquo;. It is to avoid as much of the extra overhead of traditional locks as possible in highly concurrent scenarios.&lt;/p&gt;
+&lt;p&gt;In a multithreaded environment, the most common and simplest synchronization tool is still a lock. For example, many implementations of &lt;code&gt;std::mutex&lt;/code&gt; try to stay in user space when there is no contention. But once contention becomes heavy, threads may block, wake up, and context switch, and performance can drop sharply. Even when the kernel is not involved, locks can still introduce cache synchronization, pipeline stalls, and scheduling overhead.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

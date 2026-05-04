@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>OpenGL on BlueHour</title>
+    <link>https://keqing996.github.io/tags/opengl/</link>
+    <description>Recent content in OpenGL on BlueHour</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 22 Oct 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://keqing996.github.io/tags/opengl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Getting Started with OpenGL Using SFML</title>
+      <link>https://keqing996.github.io/posts/programming/20211022_openglwithsfml/</link>
+      <pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>https://keqing996.github.io/posts/programming/20211022_openglwithsfml/</guid>
+      <description>&lt;p&gt;If you have ever taught yourself OpenGL, you probably remember the pain of pulling in a whole pile of libraries. GLEW and GLUT in particular are awkward to use. SFML makes opening a window very simple, and for anyone learning OpenGL, I think it can completely replace GLUT. So in this post I will use SFML to create the window, then write a casual OpenGL example: a simple forward renderer using the Phong model.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

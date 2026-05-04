@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Categories on BlueHour</title>
+    <link>https://keqing996.github.io/categories/</link>
+    <description>Recent content in Categories on BlueHour</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 27 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://keqing996.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Programming</title>
+      <link>https://keqing996.github.io/categories/programming/</link>
+      <pubDate>Sat, 27 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://keqing996.github.io/categories/programming/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DifferentialGeometry</title>
+      <link>https://keqing996.github.io/categories/differentialgeometry/</link>
+      <pubDate>Thu, 07 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>https://keqing996.github.io/categories/differentialgeometry/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Topology</title>
+      <link>https://keqing996.github.io/categories/topology/</link>
+      <pubDate>Sun, 05 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>https://keqing996.github.io/categories/topology/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

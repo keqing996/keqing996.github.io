@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Vulkan on BlueHour</title>
+    <link>https://keqing996.github.io/tags/vulkan/</link>
+    <description>Recent content in Vulkan on BlueHour</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sat, 27 Sep 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://keqing996.github.io/tags/vulkan/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Notes on Developing Vulkan on Mac</title>
+      <link>https://keqing996.github.io/posts/programming/20250927_vulkanonapple/</link>
+      <pubDate>Sat, 27 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://keqing996.github.io/posts/programming/20250927_vulkanonapple/</guid>
+      <description>&lt;h1 id=&#34;setup-environment-on-macos&#34;&gt;Setup environment on MacOS&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;First, install the Vulkan SDK. I recommend downloading the latest version from the &lt;a href=&#34;https://vulkan.lunarg.com/sdk/home#mac&#34;&gt;LunarG website&lt;/a&gt;. The default install path is usually &lt;strong&gt;/Users/$USER/VulkanSDK/version-number&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;The SDK includes a script named &lt;strong&gt;setup-env.sh&lt;/strong&gt; for setting environment variables, so you need to run it every time your shell starts.&lt;/li&gt;
+&lt;li&gt;Open your shell config file, such as &lt;sub&gt;/.zshrc for zsh or &lt;/sub&gt;/.bash_profile for bash, and add the following line. This gives every new shell session the corresponding Vulkan environment variables, and CMake can also find Vulkan through find_package.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Note: replace this path with your actual VulkanSDK installation path&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;source&lt;/span&gt; /Users/USER/VulkanSDK/1.3.xxx.x/setup-env.sh
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;moltenvk&#34;&gt;MoltenVK&lt;/h1&gt;
+&lt;p&gt;Apple&amp;rsquo;s native graphics API is Metal, and there is no native Vulkan implementation on macOS. So you need MoltenVK to translate Vulkan calls into Metal calls. If you installed the Vulkan SDK, MoltenVK is already included. One extra thing to watch out for: when creating Vulkan-related contexts, there are three places you need to configure.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

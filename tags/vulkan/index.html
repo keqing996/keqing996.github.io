@@ -1,0 +1,155 @@
+<!doctype html><html lang=en dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Vulkan | BlueHour</title><meta name=keywords content><meta name=description content="Sunset, coffee, and notes from the blue hour."><meta name=author content="BlueHour"><link rel=canonical href=https://keqing996.github.io/tags/vulkan/><link crossorigin=anonymous href=/assets/css/stylesheet.3293319b9354386226320ef603fe1ae50e8fbbab16c87f770dcf0fbdd4d83ff2.css integrity="sha256-MpMxm5NUOGImMg72A/4a5Q6Pu6sWyH93Dc8PvdTYP/I=" rel="preload stylesheet" as=style><link rel=icon href=https://keqing996.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://keqing996.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://keqing996.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://keqing996.github.io/apple-touch-icon.png><link rel=mask-icon href=https://keqing996.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate type=application/rss+xml href=https://keqing996.github.io/tags/vulkan/index.xml title=rss><link rel=alternate hreflang=en href=https://keqing996.github.io/tags/vulkan/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css integrity=sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+ crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js integrity=sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js integrity=sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk crossorigin=anonymous></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\[",right:"\\]",display:!0},{left:"\\(",right:"\\)",display:!1}],throwOnError:!1})})</script><style>.mermaid{display:block;margin:1.5rem 0;overflow-x:auto;padding:1.25rem;background:color-mix(in srgb,var(--code-bg) 72%,var(--theme));border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 14px 32px rgba(15,23,42,8%);text-align:center}[data-theme=dark] .mermaid{background:color-mix(in srgb,var(--entry) 76%,var(--theme));border-color:color-mix(in srgb,var(--border) 70%,var(--secondary));box-shadow:none}.mermaid svg{display:block;height:auto;margin:0 auto;max-width:100%}</style><meta property="og:url" content="https://keqing996.github.io/tags/vulkan/"><meta property="og:site_name" content="BlueHour"><meta property="og:title" content="Vulkan"><meta property="og:description" content="Sunset, coffee, and notes from the blue hour."><meta property="og:locale" content="en"><meta property="og:type" content="website"><meta name=twitter:card content="summary"><meta name=twitter:title content="Vulkan"><meta name=twitter:description content="Sunset, coffee, and notes from the blue hour."></head><body class=list id=top><header class=header><nav class=header-nav><div class=logo><a href=https://keqing996.github.io/ accesskey=h title="BlueHour (Alt + H)">BlueHour</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://keqing996.github.io/posts/ title=Posts><span>Posts</span></a></li><li><a href=https://keqing996.github.io/categories/ title=Categories><span>Categories</span></a></li><li><a href=https://keqing996.github.io/tags/ title=Tags><span>Tags</span></a></li></ul></nav></header><main class=main><header class=page-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=https://keqing996.github.io/>Home</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=https://keqing996.github.io/tags/>Tags</a></nav><h1>Vulkan</h1></header><article class="post-entry tag-entry"><header class=entry-header><h2 class=entry-hint-parent>Notes on Developing Vulkan on Mac</h2></header><div class=entry-content><p>Setup environment on MacOS First, install the Vulkan SDK. I recommend downloading the latest version from the LunarG website. The default install path is usually /Users/$USER/VulkanSDK/version-number. The SDK includes a script named setup-env.sh for setting environment variables, so you need to run it every time your shell starts. Open your shell config file, such as /.zshrc for zsh or /.bash_profile for bash, and add the following line. This gives every new shell session the corresponding Vulkan environment variables, and CMake can also find Vulkan through find_package. # Note: replace this path with your actual VulkanSDK installation path source /Users/USER/VulkanSDK/1.3.xxx.x/setup-env.sh MoltenVK Apple’s native graphics API is Metal, and there is no native Vulkan implementation on macOS. So you need MoltenVK to translate Vulkan calls into Metal calls. If you installed the Vulkan SDK, MoltenVK is already included. One extra thing to watch out for: when creating Vulkan-related contexts, there are three places you need to configure.
+...</p></div><footer class=entry-footer><span title='2025-09-27 00:00:00 +0000 UTC'>2025-09-27</span>&nbsp;·&nbsp;<span>4 min</span>&nbsp;·&nbsp;<span>672 words</span>&nbsp;·&nbsp;<span>BlueHour</span></footer><a class=entry-link aria-label="post link to Notes on Developing Vulkan on Mac" href=/posts/programming/20250927_vulkanonapple/></a></article></main><footer class=footer><span>&copy; 2026 <a href=https://keqing996.github.io/>BlueHour</a></span> ·
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
+</a><script type=module>
+    const mermaidBlocks = document.querySelectorAll(".mermaid");
+    if (mermaidBlocks.length) {
+        const { default: mermaid } = await import("https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs");
+
+        const getMermaidMode = () => {
+            const theme = document.documentElement.dataset.theme;
+            if (theme === "dark") {
+                return "dark";
+            }
+            if (theme === "light") {
+                return "light";
+            }
+            return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        };
+
+        const mermaidThemes = {
+            light: {
+                background: "transparent",
+                primaryColor: "#eef6ff",
+                primaryTextColor: "#102033",
+                primaryBorderColor: "#3b82f6",
+                secondaryColor: "#eefcf6",
+                secondaryTextColor: "#102033",
+                secondaryBorderColor: "#10b981",
+                tertiaryColor: "#fff7ed",
+                tertiaryTextColor: "#102033",
+                tertiaryBorderColor: "#f59e0b",
+                mainBkg: "#f8fbff",
+                secondBkg: "#f3fbf7",
+                lineColor: "#64748b",
+                textColor: "#102033",
+                clusterBkg: "#f8fafc",
+                clusterBorder: "#cbd5e1",
+                edgeLabelBackground: "#ffffff",
+                fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                actorBkg: "#f8fbff",
+                actorBorder: "#3b82f6",
+                actorTextColor: "#102033",
+                actorLineColor: "#94a3b8",
+                signalColor: "#475569",
+                signalTextColor: "#102033",
+                noteBkgColor: "#fff7ed",
+                noteBorderColor: "#f59e0b",
+                noteTextColor: "#102033",
+                activationBkgColor: "#e0f2fe",
+                activationBorderColor: "#0284c7",
+                sequenceNumberColor: "#ffffff"
+            },
+            dark: {
+                background: "transparent",
+                primaryColor: "#172b45",
+                primaryTextColor: "#e5edf8",
+                primaryBorderColor: "#60a5fa",
+                secondaryColor: "#123527",
+                secondaryTextColor: "#e5edf8",
+                secondaryBorderColor: "#34d399",
+                tertiaryColor: "#3b2a18",
+                tertiaryTextColor: "#f8ead4",
+                tertiaryBorderColor: "#f59e0b",
+                mainBkg: "#111827",
+                secondBkg: "#10251d",
+                lineColor: "#94a3b8",
+                textColor: "#e5edf8",
+                clusterBkg: "#202226",
+                clusterBorder: "#475569",
+                edgeLabelBackground: "#1f2937",
+                fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                actorBkg: "#172b45",
+                actorBorder: "#60a5fa",
+                actorTextColor: "#e5edf8",
+                actorLineColor: "#64748b",
+                signalColor: "#cbd5e1",
+                signalTextColor: "#e5edf8",
+                noteBkgColor: "#3b2a18",
+                noteBorderColor: "#f59e0b",
+                noteTextColor: "#f8ead4",
+                activationBkgColor: "#0f3a54",
+                activationBorderColor: "#38bdf8",
+                sequenceNumberColor: "#111827"
+            }
+        };
+
+        const getMermaidConfig = () => ({
+            startOnLoad: false,
+            theme: "base",
+            look: "classic",
+            securityLevel: "strict",
+            themeVariables: mermaidThemes[getMermaidMode()],
+            flowchart: {
+                curve: "basis",
+                htmlLabels: true,
+                nodeSpacing: 44,
+                padding: 18,
+                rankSpacing: 58
+            },
+            sequence: {
+                actorMargin: 72,
+                boxMargin: 8,
+                boxTextMargin: 6,
+                messageMargin: 44,
+                mirrorActors: false,
+                noteMargin: 14
+            }
+        });
+
+        const renderMermaidBlocks = async () => {
+            mermaid.initialize(getMermaidConfig());
+
+            for (const [index, block] of mermaidBlocks.entries()) {
+                const suffix = crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+                const id = `mermaid-${index}-${suffix}`;
+                const source = block.dataset.mermaidSource || block.textContent.trim();
+                block.dataset.mermaidSource = source;
+                try {
+                    const { svg, bindFunctions } = await mermaid.render(id, source);
+                    block.innerHTML = svg;
+                    block.dataset.processed = "true";
+                    bindFunctions?.(block);
+                } catch (error) {
+                    block.dataset.processed = "error";
+                    console.error("Mermaid render failed:", error);
+                }
+            }
+        };
+
+        await renderMermaidBlocks();
+
+        document.getElementById("theme-toggle")?.addEventListener("click", () => {
+            window.setTimeout(renderMermaidBlocks, 0);
+        });
+
+        const colorSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        const renderAutoTheme = () => {
+            if (document.documentElement.dataset.theme === "auto") {
+                renderMermaidBlocks();
+            }
+        };
+
+        if (colorSchemeQuery.addEventListener) {
+            colorSchemeQuery.addEventListener("change", renderAutoTheme);
+        } else {
+            colorSchemeQuery.addListener(renderAutoTheme);
+        }
+    }
+</script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script></body></html>

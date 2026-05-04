@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Topology on BlueHour</title>
+    <link>https://keqing996.github.io/categories/topology/</link>
+    <description>Recent content in Topology on BlueHour</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 05 Sep 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://keqing996.github.io/categories/topology/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Topology 05 - Homogeneous Coordinates and Projective Geometry</title>
+      <link>https://keqing996.github.io/posts/math/topology/20210905_homogeneouscoordinatesprojectivegeometry/</link>
+      <pubDate>Sun, 05 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>https://keqing996.github.io/posts/math/topology/20210905_homogeneouscoordinatesprojectivegeometry/</guid>
+      <description>&lt;h1 id=&#34;homogeneous-coordinates-and-projective-geometry&#34;&gt;Homogeneous Coordinates and Projective Geometry&lt;/h1&gt;
+&lt;p&gt;If you work in computer graphics, you deal with the following operations every day:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A point in 3D space is written as a 4D vector &lt;span class=&#34;math-inline&#34;&gt;$(x,y,z,w)$&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math-inline&#34;&gt;$(x,y,z,w)$&lt;/span&gt; and &lt;span class=&#34;math-inline&#34;&gt;$(kx,ky,kz,kw)\;(k \neq 0)$&lt;/span&gt; represent the same point.&lt;/li&gt;
+&lt;li&gt;At render time, you perform a &amp;ldquo;perspective divide&amp;rdquo;: &lt;span class=&#34;math-inline&#34;&gt;$(x/w,\;y/w,\;z/w)$&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math-inline&#34;&gt;$w=0$&lt;/span&gt; is treated as a &amp;ldquo;direction&amp;rdquo;—a point at infinity.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This design is not a graphics programmer&amp;rsquo;s invention. Its roots lie in &lt;strong&gt;19th-century projective geometry&lt;/strong&gt;. Homogeneous coordinates are not an engineering hack; they are the most natural coordinate system for projective space.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Topology 04 - Quaternions</title>
+      <link>https://keqing996.github.io/posts/math/topology/20210830_quaternion/</link>
+      <pubDate>Mon, 30 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://keqing996.github.io/posts/math/topology/20210830_quaternion/</guid>
+      <description>&lt;h1 id=&#34;quaternions&#34;&gt;Quaternions&lt;/h1&gt;
+&lt;h2 id=&#34;algebraic-definition&#34;&gt;Algebraic Definition&lt;/h2&gt;
+&lt;p&gt;Let &lt;span class=&#34;math-inline&#34;&gt;$\mathbb{H}=\lbrace a&amp;#43;bi&amp;#43;cj&amp;#43;dk \mid a,b,c,d \in \mathbb{R}\rbrace$&lt;/span&gt;. There is a vector-space structure on &lt;span class=&#34;math-inline&#34;&gt;$\mathbb{H}$&lt;/span&gt;:&lt;/p&gt;
+&lt;div class=&#34;math-display&#34;&gt;
+$$
+
+\cdot: \mathbb{R} \times \mathbb{H} \rightarrow \mathbb{H}:
+(\lambda, a&amp;#43;bi&amp;#43;cj&amp;#43;dk) \rightarrow (\lambda, \lambda a&amp;#43;\lambda bi&amp;#43;\lambda cj&amp;#43;\lambda dk)
+
+$$
+&lt;/div&gt;&lt;p&gt;
+&lt;/p&gt;
+&lt;div class=&#34;math-display&#34;&gt;
+$$
+
+\begin{aligned}
+&amp;#43;:\mathbb{H} \times \mathbb{H} \rightarrow \mathbb{H}:
+(a_1&amp;#43;b_1i&amp;#43;c_1j&amp;#43;d_1k, a_2&amp;#43;b_2i&amp;#43;c_2j&amp;#43;d_2k) \\
+\rightarrow (a_1&amp;#43;a_2, (b_1&amp;#43;b_2)i,(c_1&amp;#43;c_2)j,(d_1&amp;#43;d_2)k)
+\end{aligned}
+
+$$
+&lt;/div&gt;&lt;p&gt;Clearly &lt;span class=&#34;math-inline&#34;&gt;$(\mathbb{H},&amp;#43;)$&lt;/span&gt; is an abelian group, so &lt;span class=&#34;math-inline&#34;&gt;$(\mathbb{H},&amp;#43;,\cdot)$&lt;/span&gt; is an &lt;span class=&#34;math-inline&#34;&gt;$\mathbb{R}$&lt;/span&gt;-linear space.&lt;/p&gt;
+&lt;p&gt;In addition, we define a multiplication operation on &lt;span class=&#34;math-inline&#34;&gt;$\mathbb{H}$&lt;/span&gt;. First set:&lt;/p&gt;
+&lt;div class=&#34;math-display&#34;&gt;
+$$
+
+i^2=j^2=k^2=ijk=-1
+
+$$
+&lt;/div&gt;&lt;div class=&#34;math-display&#34;&gt;
+$$
+
+ij=k,jk=i,ki=j,ji=-k,kj=-i,ik=-j
+
+$$
+&lt;/div&gt;&lt;p&gt;Then multiplication is defined componentwise. To keep the notation lighter, the imaginary part can be written as a vector: &lt;span class=&#34;math-inline&#34;&gt;$\vec{v}=(b,c,d)$&lt;/span&gt;. A quaternion can then be written as &lt;span class=&#34;math-inline&#34;&gt;$x=[a,\vec{v}]=a&amp;#43;\vec{v}$&lt;/span&gt;; this is only notation, and does not mean we are adding a scalar and a vector.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Topology 03 - Quotient Sets</title>
+      <link>https://keqing996.github.io/posts/math/topology/20210821_quotientset/</link>
+      <pubDate>Sat, 21 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://keqing996.github.io/posts/math/topology/20210821_quotientset/</guid>
+      <description>&lt;h1 id=&#34;quotients&#34;&gt;Quotients&lt;/h1&gt;
+&lt;h2 id=&#34;quotient-sets&#34;&gt;Quotient Sets&lt;/h2&gt;
+&lt;p&gt;Let &lt;span class=&#34;math-inline&#34;&gt;$X$&lt;/span&gt; be a set. An &lt;strong&gt;equivalence relation&lt;/strong&gt; on &lt;span class=&#34;math-inline&#34;&gt;$X$&lt;/span&gt; is a relation that is reflexive, symmetric, and transitive.&lt;/p&gt;
+&lt;p&gt;Let &lt;span class=&#34;math-inline&#34;&gt;$X$&lt;/span&gt; be a set, and let &lt;span class=&#34;math-inline&#34;&gt;$\sim$&lt;/span&gt; be an equivalence relation on &lt;span class=&#34;math-inline&#34;&gt;$X$&lt;/span&gt;. For any &lt;span class=&#34;math-inline&#34;&gt;$a \in X$&lt;/span&gt;, the set &lt;span class=&#34;math-inline&#34;&gt;$\bar{a} =\lbrace b \in X | b \sim a \rbrace$&lt;/span&gt; is the &lt;strong&gt;equivalence class&lt;/strong&gt; containing &lt;span class=&#34;math-inline&#34;&gt;$a$&lt;/span&gt;. An equivalence class is a special kind of subset: if two equivalence classes intersect, then they must actually be the same class (by transitivity).&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Topology 02 - Continuity, Compactness, and Connectedness</title>
+      <link>https://keqing996.github.io/posts/math/topology/20210810_continuitycompactnessconnectedness/</link>
+      <pubDate>Tue, 10 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://keqing996.github.io/posts/math/topology/20210810_continuitycompactnessconnectedness/</guid>
+      <description>&lt;h1 id=&#34;continuitycompactnessconnectedness&#34;&gt;Continuity/Compactness/Connectedness&lt;/h1&gt;
+&lt;h2 id=&#34;the-definition-of-continuity&#34;&gt;The Definition of Continuity&lt;/h2&gt;
+&lt;p&gt;In mathematical analysis, we define continuity of a function like this: &lt;span class=&#34;math-inline&#34;&gt;$f$&lt;/span&gt; is continuous at &lt;span class=&#34;math-inline&#34;&gt;$x\_0$&lt;/span&gt; if for every &lt;span class=&#34;math-inline&#34;&gt;$\epsilon$&lt;/span&gt;, there exists a &lt;span class=&#34;math-inline&#34;&gt;$\delta$&lt;/span&gt; such that for every &lt;span class=&#34;math-inline&#34;&gt;$x \in R^n$&lt;/span&gt;, if &lt;span class=&#34;math-inline&#34;&gt;$\vert \vert x - x\_0 \vert \vert &amp;lt; \delta$&lt;/span&gt;, then &lt;span class=&#34;math-inline&#34;&gt;$\vert \vert f(x) - f(x\_0) \vert \vert &amp;lt; \epsilon$&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;And we define an open set in &lt;span class=&#34;math-inline&#34;&gt;$R^n$&lt;/span&gt; as follows: &lt;span class=&#34;math-inline&#34;&gt;$U \subset R^n$&lt;/span&gt; is called an open set in &lt;span class=&#34;math-inline&#34;&gt;$R^n$&lt;/span&gt; if for every &lt;span class=&#34;math-inline&#34;&gt;$x \in U$&lt;/span&gt;, there exists a &lt;span class=&#34;math-inline&#34;&gt;$\delta$&lt;/span&gt; such that &lt;span class=&#34;math-inline&#34;&gt;$B(x;\delta) \subset U$&lt;/span&gt;, where &lt;span class=&#34;math-inline&#34;&gt;$B(x;\delta)$&lt;/span&gt; is an open ball.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Topology 01 - Open Sets, Topologies, and Limit Points</title>
+      <link>https://keqing996.github.io/posts/math/topology/20210801_opensettopologylimit/</link>
+      <pubDate>Sun, 01 Aug 2021 00:00:00 +0000</pubDate>
+      <guid>https://keqing996.github.io/posts/math/topology/20210801_opensettopologylimit/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;The ultimate goal of topology:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Classify spaces up to homeomorphism. This immediately leads to two questions:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Given two spaces, how do we prove they are homeomorphic? This is often rather hard.&lt;/li&gt;
+&lt;li&gt;Given two spaces, how do we prove they are not homeomorphic? This is relatively easier.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The effective tools for proving that two spaces are not homeomorphic are topological invariants.&lt;/p&gt;
+&lt;h1 id=&#34;open-setstopologiescontinuity&#34;&gt;Open Sets/Topologies/Continuity&lt;/h1&gt;
+&lt;h2 id=&#34;open-sets&#34;&gt;Open Sets&lt;/h2&gt;
+&lt;p&gt;Let &lt;span class=&#34;math-inline&#34;&gt;$X$&lt;/span&gt; be a set, and let &lt;span class=&#34;math-inline&#34;&gt;$\mathscr{F}$&lt;/span&gt; be a family consisting of some subsets of &lt;span class=&#34;math-inline&#34;&gt;$X$&lt;/span&gt;. We call &lt;span class=&#34;math-inline&#34;&gt;$F$&lt;/span&gt; an open set in &lt;span class=&#34;math-inline&#34;&gt;$X$&lt;/span&gt; if:&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

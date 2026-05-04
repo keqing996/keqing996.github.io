@@ -1,0 +1,409 @@
+<!doctype html><html lang=en dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Differential Geometry | BlueHour</title><meta name=keywords content><meta name=description content="Theory of Curves
+A Few Results I Often Forget
+
+Double cross product formula
+
+
+$$
+
+(\vec{a} \times \vec{b}) \times \vec{c} = 
+\vec{b} (\vec{a} \cdot \vec{c}) - \vec{a} (\vec{b} \cdot \vec{c})
+
+$$
+
+Lagrange identity
+
+
+$$
+
+(\vec{a} \times \vec{b}) (\vec{c} \times \vec{d})=
+(\vec{a}\cdot\vec{c})(\vec{b}\cdot\vec{d})-(\vec{a}\cdot\vec{d})(\vec{b}\cdot\vec{c})
+
+$$
+
+Suppose the vector-valued function ${a}(t)$ is nowhere zero and continuously differentiable. Then the length of ${a}(t)$ is constant if and only if:
+
+
+$$
+
+\vec{a}^{\prime}(t) \cdot \vec{a}(t) \equiv 0
+
+$$
+Regular Parametric Curves
+A parametric curve ${\textbf{r} }(t)$ is a regular parametric curve if it satisfies the following conditions:"><meta name=author content="BlueHour"><link rel=canonical href=https://keqing996.github.io/posts/math/differentialgeometry/20211007_differentialgeometry/><link crossorigin=anonymous href=/assets/css/stylesheet.3293319b9354386226320ef603fe1ae50e8fbbab16c87f770dcf0fbdd4d83ff2.css integrity="sha256-MpMxm5NUOGImMg72A/4a5Q6Pu6sWyH93Dc8PvdTYP/I=" rel="preload stylesheet" as=style><link rel=icon href=https://keqing996.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://keqing996.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://keqing996.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://keqing996.github.io/apple-touch-icon.png><link rel=mask-icon href=https://keqing996.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://keqing996.github.io/posts/math/differentialgeometry/20211007_differentialgeometry/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css integrity=sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+ crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js integrity=sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js integrity=sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk crossorigin=anonymous></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\[",right:"\\]",display:!0},{left:"\\(",right:"\\)",display:!1}],throwOnError:!1})})</script><style>.mermaid{display:block;margin:1.5rem 0;overflow-x:auto;padding:1.25rem;background:color-mix(in srgb,var(--code-bg) 72%,var(--theme));border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 14px 32px rgba(15,23,42,8%);text-align:center}[data-theme=dark] .mermaid{background:color-mix(in srgb,var(--entry) 76%,var(--theme));border-color:color-mix(in srgb,var(--border) 70%,var(--secondary));box-shadow:none}.mermaid svg{display:block;height:auto;margin:0 auto;max-width:100%}</style><meta property="og:url" content="https://keqing996.github.io/posts/math/differentialgeometry/20211007_differentialgeometry/"><meta property="og:site_name" content="BlueHour"><meta property="og:title" content="Differential Geometry"><meta property="og:description" content="Theory of Curves A Few Results I Often Forget Double cross product formula $$ (\vec{a} \times \vec{b}) \times \vec{c} = \vec{b} (\vec{a} \cdot \vec{c}) - \vec{a} (\vec{b} \cdot \vec{c}) $$ Lagrange identity $$ (\vec{a} \times \vec{b}) (\vec{c} \times \vec{d})= (\vec{a}\cdot\vec{c})(\vec{b}\cdot\vec{d})-(\vec{a}\cdot\vec{d})(\vec{b}\cdot\vec{c}) $$ Suppose the vector-valued function ${a}(t)$ is nowhere zero and continuously differentiable. Then the length of ${a}(t)$ is constant if and only if: $$ \vec{a}^{\prime}(t) \cdot \vec{a}(t) \equiv 0 $$ Regular Parametric Curves A parametric curve ${\textbf{r} }(t)$ is a regular parametric curve if it satisfies the following conditions:"><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2021-10-07T00:00:00+00:00"><meta property="article:modified_time" content="2021-10-07T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Differential Geometry"><meta name=twitter:description content="Theory of Curves A Few Results I Often Forget Double cross product formula $$ (\vec{a} \times \vec{b}) \times \vec{c} = \vec{b} (\vec{a} \cdot \vec{c}) - \vec{a} (\vec{b} \cdot \vec{c}) $$ Lagrange identity $$ (\vec{a} \times \vec{b}) (\vec{c} \times \vec{d})= (\vec{a}\cdot\vec{c})(\vec{b}\cdot\vec{d})-(\vec{a}\cdot\vec{d})(\vec{b}\cdot\vec{c}) $$ Suppose the vector-valued function ${a}(t)$ is nowhere zero and continuously differentiable. Then the length of ${a}(t)$ is constant if and only if: $$ \vec{a}^{\prime}(t) \cdot \vec{a}(t) \equiv 0 $$ Regular Parametric Curves A parametric curve ${\textbf{r} }(t)$ is a regular parametric curve if it satisfies the following conditions:"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://keqing996.github.io/posts/"},{"@type":"ListItem","position":2,"name":"Differential Geometry","item":"https://keqing996.github.io/posts/math/differentialgeometry/20211007_differentialgeometry/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Differential Geometry","name":"Differential Geometry","description":"Theory of Curves A Few Results I Often Forget Double cross product formula $$ (\\vec{a} \\times \\vec{b}) \\times \\vec{c} = \\vec{b} (\\vec{a} \\cdot \\vec{c}) - \\vec{a} (\\vec{b} \\cdot \\vec{c}) $$ Lagrange identity $$ (\\vec{a} \\times \\vec{b}) (\\vec{c} \\times \\vec{d})= (\\vec{a}\\cdot\\vec{c})(\\vec{b}\\cdot\\vec{d})-(\\vec{a}\\cdot\\vec{d})(\\vec{b}\\cdot\\vec{c}) $$ Suppose the vector-valued function ${a}(t)$ is nowhere zero and continuously differentiable. Then the length of ${a}(t)$ is constant if and only if: $$ \\vec{a}^{\\prime}(t) \\cdot \\vec{a}(t) \\equiv 0 $$ Regular Parametric Curves A parametric curve ${\\textbf{r} }(t)$ is a regular parametric curve if it satisfies the following conditions:\n","keywords":[],"articleBody":"Theory of Curves A Few Results I Often Forget Double cross product formula $$ (\\vec{a} \\times \\vec{b}) \\times \\vec{c} = \\vec{b} (\\vec{a} \\cdot \\vec{c}) - \\vec{a} (\\vec{b} \\cdot \\vec{c}) $$ Lagrange identity $$ (\\vec{a} \\times \\vec{b}) (\\vec{c} \\times \\vec{d})= (\\vec{a}\\cdot\\vec{c})(\\vec{b}\\cdot\\vec{d})-(\\vec{a}\\cdot\\vec{d})(\\vec{b}\\cdot\\vec{c}) $$ Suppose the vector-valued function ${a}(t)$ is nowhere zero and continuously differentiable. Then the length of ${a}(t)$ is constant if and only if: $$ \\vec{a}^{\\prime}(t) \\cdot \\vec{a}(t) \\equiv 0 $$ Regular Parametric Curves A parametric curve ${\\textbf{r} }(t)$ is a regular parametric curve if it satisfies the following conditions:\n${\\textbf{r} }(t)$ is at least a vector-valued function of the variable $t$ with continuous derivatives up to order three. Every point on the curve is a regular point; that is, for any $t$, ${\\textbf{r} }^{\\prime}(t) \\neq 0$. The direction in which the parameter increases is called the positive direction of the parametric curve.\nFor a regular parametric curve, arc length is an invariant of the curve:\n$$ s=\\int_{a}^{b}\\vert {\\textbf{r} }^{\\prime}(t) \\vert dt $$ Basically, we can think of ${\\textbf{r} }^{\\prime}(t)$ as velocity, and arc length is the distance obtained by integrating speed.\nAlso, the arc length $s$ can be used as a parameter of the curve. If $\\vert {\\textbf{r} }^{\\prime}(t) \\vert \\equiv 1$, it is called an arc-length parameter.\nWhy arc length can be used as a curve parameter:\nFirst we have:\n$$ \\frac{ds}{dt}=\\vert {\\textbf{r} }^{\\prime}(t) \\vert \u003e 0 $$ So $s(t)$ is monotonically increasing with respect to $t$. Therefore $s(t)$ has an inverse function $t=t(s)$, and hence $s$ can be used as a parameter instead of $t$.\nIf the curve is parameterized by arc length, that means the tangent vector field of the curve is a unit vector field. (Think of ${\\textbf{r} }^{\\prime}(t)$ as velocity: using an arc-length parameter means the motion has constant speed 1.)\nFrenet Frame Take a regular parametric curve ${\\textbf{r} }(s)$, with $s$ chosen as the arc-length parameter. To build the frame:\nTangent vector Differentiate ${\\textbf{r} }(t)$ directly with respect to $t$ to get the tangent vector:\n$$ {\\textbf{t} }(s)=\\frac{d{\\textbf{r} }}{ds} $$ Principal normal vector Since $s$ is the arc-length parameter, $\\vert {\\textbf{t} }(s) \\vert = 1$, namely $\u003c{\\textbf{t} }(s), {\\textbf{t} }(s)\u003e=1$. Differentiating this gives $\u003c{\\textbf{t} }^{\\prime}(s), {\\textbf{t} }(s)\u003e=0$. So we have found a normal vector ${\\textbf{t} }^{\\prime}(s)$. Although $\\vert {\\textbf{t} }(s) \\vert = 1$, $\\vert {\\textbf{t} }^{\\prime}(s) \\vert$ is not necessarily unit length. To make ${\\textbf{n} }$ a unit vector, define the curvature:\n$$ \\kappa (s) = \\vert \\frac{d{\\textbf{t} }}{ds} \\vert $$ Then redefine the unit normal vector we found as:\n$$ {\\textbf{n} }=\\frac{1}{\\kappa (s)} \\frac{d{\\textbf{t} }}{ds} $$ Binormal vector ${\\textbf{t} }$ and ${\\textbf{n} }$ are perpendicular, so define the binormal vector directly by the cross product:\n$$ {\\textbf{b} }={\\textbf{t} } \\times {\\textbf{n} } $$ Differentiate the binormal vector once more:\n$$ \\frac{d{\\textbf{b} }}{ds}=\\frac{d{\\textbf{t} }}{ds}\\times {\\textbf{n} } + {\\textbf{t} } \\times \\frac{d{\\textbf{n} }}{ds} = \\kappa (s) {\\textbf{n} } \\times {\\textbf{n} } + {\\textbf{t} }\\times \\frac{d{\\textbf{n} }}{ds} = {\\textbf{t} }\\times \\frac{d{\\textbf{n} }}{ds} $$ That is, $d{\\textbf{b} } / ds$ is perpendicular to the tangent vector ${\\textbf{t} }$, so $d{\\textbf{b} } / ds$ must be parallel to ${\\textbf{n} }$. Thus set:\n$$ \\frac{d{\\textbf{b} }}{ds}=- \\tau (s) {\\textbf{n} } $$ Multiply both sides by ${\\textbf{n} }$. Since it is a unit vector, we get:\n$$ \\tau (s)=-\\frac{d{\\textbf{b} }}{ds} \\cdot {\\textbf{n} } $$ This is called the torsion of the curve. It measures how much the curve deviates from being planar.\nIn summary, the Frenet frame of a curve is $\\lbrace {\\textbf{r} }; {\\textbf{t} },{\\textbf{n} },{\\textbf{b} }\\rbrace$.\nFrame Equations of Motion This just means differentiating the Frenet frame. Since the frame itself is an orthonormal basis, after differentiation it can still be expressed linearly in terms of the frame itself. The result is:\n$$ \\frac{d}{ds} \\left[ \\begin{array}{c} {\\textbf{t} } \\\\ {\\textbf{n} } \\\\ {\\textbf{b} } \\end{array} \\right] = \\left[ \\begin{array}{ccc} \u0026 \\kappa (s) \u0026 \\\\ -\\kappa (s) \u0026 \u0026 \\tau (s) \\\\ \u0026 -\\tau (s) \u0026 \\end{array} \\right] \\left[ \\begin{array}{c} {\\textbf{t} } \\\\ {\\textbf{n} } \\\\ {\\textbf{b} } \\end{array} \\right] $$ The first row follows directly from the definition. The third row also follows directly from the definition of torsion above.\nFor the second row, differentiate both sides of ${\\textbf{n} }={\\textbf{b} } \\times {\\textbf{t} }$.\nFundamental Theorem of Curve Theory That is: up to rigid motions, curvature and torsion uniquely determine a curve (for a regular arc-length parameterized curve, with curvature nowhere zero).\nThe essence of the proof is to show that the frame equations of motion have a unique solution, and that the solution is indeed a regular curve parameterized by arc length.\nThe Two Fundamental Forms of a Surface A surface is usually written as $\\textbf{r}=\\textbf{r}({u^1},{u^2})$ or $\\textbf{r}=\\textbf{r}(u,v)$. To make the later Einstein summation notation convenient, I will use the first notation directly. Also, partial derivatives are denoted by $\\textbf{r}\\_{u^i}$, or more simply by $\\textbf{r}\\_i$.\nRegular parametric surface:\nThe continuous map $S \\rightarrow R^3$ is a homeomorphism. It is smooth and differentiable at least three times. Regularity: the map is injective; equivalently, the Jacobi matrix has full rank; equivalently, $\\textbf{r}\\_{u^1}$ and $\\textbf{r}\\_{u^2}$ are linearly independent. Why require a homeomorphism: a one-to-one map alone is not enough. Two points that are very close in $R^2$ might be mapped very far apart in $R^3$. So we want the differential structure to be controlled as well, and that is why we require a homeomorphism.\nThe definition of a surface above is local. The full definition of a surface is obtained by gluing together locally defined surface patches. For planes and cylinders, the local definition can be equivalent to a global one, but for spheres and similar surfaces it cannot. Spheres, tori, and so on are bounded closed subsets of $R^3$, hence compact sets, so we cannot find an open set homeomorphic to the whole surface.\nFor a regular parametric surface, $\\textbf{r}\\_u$ and $\\textbf{r}\\_v$ are two tangent vectors. They are linearly independent, and the space they span is the tangent space, $T\\_pS\\lbrace \\textbf{r}\\_{u^1},\\textbf{r}\\_{u^2}\\rbrace$. The cross product of the two tangent vectors gives a normal vector (which needs to be normalized), $\\textbf{n}= \\textbf{r}\\_{u^1} \\times \\textbf{r}\\_{u^2} / \\vert \\textbf{r}\\_{u^1} \\times \\textbf{r}\\_{u^2} \\vert$. Therefore the two tangent vectors together with the normal vector form the natural frame of the surface, $\\lbrace \\textbf{r}\\_{u^1}, \\textbf{r}\\_{u^2}, \\textbf{n} \\rbrace$.\nFor $\\textbf{r}=\\textbf{r}({u^1},{u^2})$, take the first differential:\n$$ d \\textbf{r}=\\textbf{r}_{u^1} d{u^1} + \\textbf{r}_{u^2} d{u^2} $$ Then the first fundamental form is the square of the length of the tangent vector $d{\\textbf{r} }$:\n$$ I=\\langle d\\textbf{r}, d\\textbf{r}\\rangle=[d{u^1}, d{u^2}] \\left[ \\begin{array}{cc} {\\textbf{r}_1} {\\textbf{r}_1} \u0026 {\\textbf{r}_1} {\\textbf{r}_2} \\\\ {\\textbf{r}_2} {\\textbf{r}_1} \u0026 {\\textbf{r}_2} {\\textbf{r}_2} \\end{array} \\right] \\left[ \\begin{array}{c} d{u^1} \\\\ d{u^2} \\end{array} \\right]=g_{ij}du^idu^j $$ Here $g\\_{ij}$ denotes the coefficient matrix of the first fundamental form. The second fundamental form is:\n$$ \\begin{aligned} II \u0026= -\\langle d{\\textbf{r} } , d{\\textbf{n} }\\rangle=[d{u^1}, d{u^2}] \\left[ \\begin{array}{cc} -{\\textbf{r}_1} {\\textbf{n}_1} \u0026 -{\\textbf{r}_1} {\\textbf{n}_2} \\\\ -{\\textbf{r}_2} {\\textbf{n}_1} \u0026 -{\\textbf{r}_2} {\\textbf{n}_2} \\end{array} \\right] \\left[ \\begin{array}{c} d{u^1} \\\\ d{u^2}\\end{array} \\right] \\\\ \u0026= [d{u^1}, d{u^2}] \\left[ \\begin{array}{cc} {\\textbf{r}_{11} } {\\textbf{n} } \u0026 {\\textbf{r}_{12} } {\\textbf{n} } \\\\ {\\textbf{r}_{21} } {\\textbf{n} } \u0026 {\\textbf{r}_{22} } {\\textbf{n} } \\end{array} \\right] \\left[ \\begin{array}{c} d{u^1} \\\\ d{u^2} \\end{array} \\right]\\\\ \u0026=h_{ij}du^idu^j \\end{aligned} $$ Here $h\\_{ij}$ denotes the coefficient matrix of the second fundamental form. The equality between corresponding entries of the two matrices above uses:\n$$ \\langle\\textbf{r}_1, \\textbf{n}\\rangle = 0 \\\\ \\langle\\textbf{r}_2, \\textbf{n}\\rangle = 0 $$ Just take partial derivatives on both sides of these two equations.\nThe First Fundamental Form Describes Metric Properties The area element at a point of the surface is:\n$$ dA=\\vert {\\textbf{r}_1} \\times {\\textbf{r}_2} \\vert = \\sqrt{ {\\textbf{r}_1} {\\textbf{r}_1} \\cdot {\\textbf{r}_2} {\\textbf{r}_2} - ({\\textbf{r}_1} {\\textbf{r}_2})^2}dudv $$ The first fundamental form is always positive definite.\nThe Second Fundamental Form Describes Bending Properties Using the usual $(u,v)$ notation for $(u^1,u^2)$, take a small displacement on the surface $S$ from the point $(u\\_0,v\\_0)$ to $(u\\_0+\\Delta u,v\\_0+\\Delta v)$. We look at how much this displacement differs in the normal direction at the initial point of the normal line, namely:\n$$ \\begin{aligned} \\delta(\\Delta u, \\Delta v) \u0026= ({\\textbf{r} }(u_0+\\Delta u,v_0+\\Delta v)-{\\textbf{r} }(u_0,v_0))\\cdot {\\textbf{n} } \\\\ \u0026= [({\\textbf{r}_u} \\Delta u + {\\textbf{r}_v} \\Delta v) {}+ \\frac{1}{2}({\\textbf{r}_{uu} } (\\Delta u)^2 + 2 {\\textbf{r}_{uv} }\\Delta u \\Delta v + {\\textbf{r}_{vv} } (\\Delta v)^2) + o ((\\Delta u)^2 + (\\Delta v)^2)] \\cdot {\\textbf{n} } \\end{aligned} $$ Take the limit of the expression above. The first expanded term lies in the tangent plane, so its inner product with the normal is directly 0. The third term is a higher-order infinitesimal and vanishes in the limit. What remains is the inner product of the second term with the normal, which is exactly the second fundamental form.\nThe second fundamental form may be positive definite or negative definite; it may also be indefinite or degenerate.\nEquations of Motion and Structure Equations of Surfaces Equations of Motion With the natural frame $\\lbrace \\textbf{r}\\_{u^1}, \\textbf{r}\\_{u^2}, \\textbf{n} \\rbrace$ in hand, we can now derive the equations of motion for a surface. We have:\n$$ \\left\\lbrace \\begin{aligned} \\partial_j \\textbf{r}_i \u0026= \\Gamma_{ij}^k \\textbf{r}_k + \\Lambda_{ij} \\textbf{n} \\\\ \\partial_i \\textbf{n} \u0026= \\Theta_i^j \\textbf{r}_j + \\Delta_i \\textbf{n} \\end{aligned} \\right. $$ Now compute $\\Gamma,\\Lambda,\\Theta,\\Delta$ one by one:\nFor the second equation, since $\\textbf{n}$ is a unit normal vector, the derivative of the unit normal vector is a vector in the tangent plane and has no normal component. That is:\n$$ {\\textbf{n} } \\cdot {\\textbf{n} } = 1 \\Rightarrow 2 {\\textbf{n}_{u^i} } \\cdot {\\textbf{n} } = 0 $$ Therefore:\n$$ \\Delta_i = 0 $$ For the second equation, take the inner product of both sides with $\\textbf{r}\\_k$:\n$$ \\langle\\textbf{n}_i, \\textbf{r}_k\\rangle = -\\langle\\textbf{n}, \\textbf{r}_{ik}\\rangle = \\Theta_i^j \\langle\\textbf{r}_j, \\textbf{r}_k\\rangle $$ That is:\n$$ \\Theta_i^j g_{jk}=-h_{ik} $$ So:\n$$ \\Theta_i^j=-g^{jk}h_{ik} $$ Here $g^{ik}$ is the inverse matrix of $g\\_{ik}$. It is just a notation. We have $g^{ik}g\\_{ik}=\\delta\\_i^k$.\nFor convenience later, write:\n$$ a_i^j=g^{jk}h_{ik} $$ Then the second equation finally becomes (here I pull out the minus sign, which makes later manipulations cleaner):\n$$ \\partial_i \\textbf{n} = -a_i^j \\textbf{r}_j $$ Now look at the first equation. Take the inner product of both sides with $\\textbf{n}$:\n$$ \\langle\\textbf{r}_{ij},\\textbf{n}\\rangle=\\Gamma_{ij}^k \\langle\\textbf{r}_k, \\textbf{n}\\rangle+\\Lambda_{ij}\\langle\\textbf{n},\\textbf{n}\\rangle=\\Lambda_{ij} $$ Therefore:\n$$ \\Lambda_{ij}=h_{ij} $$ The only thing left is $\\Gamma$. Take the inner product of both sides with $\\textbf{r}\\_m$:\n$$ \\langle\\textbf{r}_{ij}, \\textbf{r}_m\\rangle=\\Gamma_{ij}^k \\langle\\textbf{r}_k, \\textbf{r}_m\\rangle=\\Gamma_{ij}^k g_{km} $$ To compute $\\langle\\textbf{r}\\_{ij}, \\textbf{r}\\_m\\rangle$, consider:\n$$ \\partial_i \\langle\\textbf{r}_j, \\textbf{r}_m\\rangle = \\partial_i g_{jm} = \\langle\\textbf{r}_{ij}, \\textbf{r}_m\\rangle + \\langle\\textbf{r}_j, \\textbf{r}_{im}\\rangle $$ Cycling the indices gives two more equations:\n$$ \\begin{aligned} \\partial_j \\langle\\textbf{r}_i, \\textbf{r}_m\\rangle \u0026= \\partial_j g_{im} = \\langle\\textbf{r}_{ij}, \\textbf{r}_m\\rangle + \\langle\\textbf{r}_i, \\textbf{r}_{jm}\\rangle \\\\ \\partial_m \\langle\\textbf{r}_i, \\textbf{r}_j\\rangle \u0026= \\partial_m g_{ij} = \\langle\\textbf{r}_{im}, \\textbf{r}_j\\rangle + \\langle\\textbf{r}_i, \\textbf{r}_{jm}\\rangle \\end{aligned} $$ Add the first two equations and subtract the third, and we can solve for $\\langle\\textbf{r}\\_{ij}, \\textbf{r}\\_m\\rangle$:\n$$ \\langle\\textbf{r}_{ij}, \\textbf{r}_m\\rangle = \\frac{1}{2} (\\partial_i g_{jm} + \\partial_i g_{im} - \\partial_i g_{ij}) $$ So we have:\n$$ \\Gamma_{ij}^k=\\frac{1}{2} g^{km} (\\partial_i g_{jm} + \\partial_j g_{im} - \\partial_m g_{ij}) $$ Finally, the equations of motion for a surface are:\n$$ \\left\\lbrace \\begin{aligned} \\textbf{r}_{ij} \u0026= \\Gamma_{ij}^k \\textbf{r}_k + h_{ij} \\textbf{n} \\\\ \\textbf{n}_i \u0026= -a_i^j \\textbf{r}_j \\end{aligned} \\right. $$ where:\n$$ \\left\\lbrace \\begin{aligned} \\Gamma_{ij}^k \u0026= \\frac{1}{2} g^{km} (\\partial_i g_{jm} + \\partial_j g_{im} - \\partial_m g_{ij}) \\\\ a_i^j \u0026= g^{jk}h_{ik} \\end{aligned} \\right. $$ Structure Equations Next, derive the structure equations of a surface. The idea is the commutativity of second and third partial derivatives. Differentiate the first equation of motion once more:\n$$ \\begin{aligned} \\textbf{r}_{ijm} \u0026= (\\partial_m\\Gamma_{ij}^k) \\textbf{r}_k + \\Gamma_{ij}^k \\textbf{r}_{km} + (\\partial_m h_{ij}) \\textbf{n} + h_{ij} \\textbf{n}_m \\\\ \u0026= (\\partial_m\\Gamma_{ij}^k) \\textbf{r}_k + \\Gamma_{ij}^k (\\Gamma_{km}^t \\textbf{r}_t + h_{km} \\textbf{n}) + (\\partial_m h_{ij}) \\textbf{n} - h_{ij}(a_m^t \\textbf{r}_t) \\\\ \u0026= (\\partial_m\\Gamma_{ij}^t + \\Gamma_{ij}^k \\Gamma_{km}^t - h_{ij} a_m^t)\\textbf{r}_t + (\\Gamma_{ij}^k h_{km} + \\partial_m h_{ij}) \\textbf{n} \\end{aligned} $$ Swap the order of differentiation in the last two indices:\n$$ \\begin{aligned} \\textbf{r}_{imj} \u0026= (\\partial_j\\Gamma_{im}^t + \\Gamma_{im}^k \\Gamma_{kj}^t - h_{im} a_j^t)\\textbf{r}_t + (\\Gamma_{im}^k h_{kj} + \\partial_j h_{im}) \\textbf{n} \\end{aligned} $$ The two expressions should be equal, so the corresponding tangential and normal parts must be equal respectively:\n$$ \\left \\lbrace \\begin{aligned} \u0026 \\partial_m\\Gamma_{ij}^t + \\Gamma_{ij}^k \\Gamma_{km}^t - \\partial_j\\Gamma_{im}^t - \\Gamma_{im}^k \\Gamma_{kj}^t = (h_{ij} h_{mp} - h_{im} h_{jp}) g^{pt} \\\\ \u0026 \\partial_m h_{ij} - \\partial_j h_{im} = \\Gamma_{im}^k h_{kj} - \\Gamma_{ij}^k h_{km} \\end{aligned} \\right. $$ The first equation, from the tangential part, is called the Gauss equation. The second equation, from the normal part, is called the Codazzi equation. These two equations are necessary conditions for forming a parametric surface.\nSimilarly, we can perform the same operation on the second equation of motion, but it still gives the Codazzi equation and no new equation appears.\nNumber of Independent Equations in the Structure Equations Normal Curvature This comes from studying the curvature vector of a curve on a surface. Let the curve be ${\\textbf{r} }(s)={\\textbf{r} }({u^1}(s),{u^2}(s))$, where $s$ is the arc-length parameter. Then the unit tangent vector on the curve is:\n$$ {\\textbf{t} }(s) = \\frac{d{\\textbf{r} }}{ds}={\\textbf{r}_{u^1} } \\frac{d{u^1} }{ds} + {\\textbf{r}_{u^2} } \\frac{d{u^2} }{ds} $$ Differentiate once more to get the curvature vector:\n$$ \\frac{d{\\textbf{t} }}{ds}=\\kappa {\\textbf{n}_{curve} }(s) = \\frac{d^2{\\textbf{r} }}{ds^2}={\\textbf{r}_{u^1} } \\frac{d^2{u^1} }{ds^2} + {\\textbf{r}_{u^2} } \\frac{d^2{u^2} }{ds^2} + {\\textbf{r}_{ {u^1}{u^1} }} (\\frac{d{u^1} }{ds})^2 + 2{\\textbf{r}_{ {u^1}{u^2} }}\\frac{d{u^1} }{ds}\\frac{d{u^2} }{ds}+ {\\textbf{r}_{ {u^2}{u^2} }} (\\frac{d{u^2} }{ds})^2 $$ This vector (the normal vector of the curve) can be decomposed into two parts: a tangential part and a normal part relative to the surface. The normal part is the normal curvature, measuring the bending of the surface relative to $R^3$; the tangential part is the geodesic curvature, measuring how the curve bends relative to the surface.\nSo we examine the normal direction. Take the dot product of the expression above with the surface normal vector ${\\textbf{n} }$:\n$$ \\frac{d{\\textbf{t} }}{ds} \\cdot {\\textbf{n} } = [\\frac{d{u^1} }{ds}, \\frac{d{u^2} }{ds}] \\left[ \\begin{array}{cc} {\\textbf{r}_{11} } {\\textbf{n} } \u0026 {\\textbf{r}_{12} } {\\textbf{n} } \\\\ {\\textbf{r}_{21} } {\\textbf{n} } \u0026 {\\textbf{r}_{22} } {\\textbf{n} } \\end{array} \\right] \\left[ \\begin{array}{c} d{u^1}/ds \\\\ d{u^2}/ds \\end{array} \\right] = \\kappa_n $$ The defined $\\kappa\\_n$ is the normal curvature of the surface at this point along the chosen unit tangent vector. We can see that:\nThe value of the normal curvature depends on the selected point. The normal curvature depends only on the second fundamental form. The normal curvature depends on the tangent vector at the point under consideration (because we study it through curves on the surface), but it does not depend on the particular curve. If two different curves have the same tangent vector at this point, then their normal curvature is the same. Note that the derivation of normal curvature is based on a unit tangent vector at a point:\n$$ \\frac{d{\\textbf{r} }}{ds}={\\textbf{r}_1} \\frac{d{u^1} }{ds} + {\\textbf{r}_2} \\frac{d{u^2} }{ds} $$ Given a unit tangent vector ${v}=\\lambda\\_1 {\\textbf{r}\\_1} + \\lambda\\_2 {\\textbf{r}\\_2}$, the pair $\\lbrace \\lambda\\_1, \\lambda\\_2 \\rbrace$ corresponds to $\\lbrace du^1/ds, du^2/ds\\rbrace$. So the normal curvature is also:\n$$ \\kappa_n=[\\lambda_1, \\lambda_2]h_{ij}[\\lambda_1, \\lambda_2]^T=\\lambda^i \\lambda^j h_{ij} $$ where $h\\_{ij}$ is the coefficient matrix of the second fundamental form.\nNext, change the form a bit so that normal curvature becomes a function of the “direction” at a point on the surface.\n$$ \\kappa_n = [\\frac{d{u^1} }{ds}, \\frac{d{u^2} }{ds}] \\left[ \\begin{array}{cc} {\\textbf{r}_{11} } {\\textbf{n} } \u0026 {\\textbf{r}_{12} } {\\textbf{n} } \\\\ {\\textbf{r}_{21} } {\\textbf{n} } \u0026 {\\textbf{r}_{22} } {\\textbf{n} } \\end{array} \\right] \\left[ \\begin{array}{c} d{u^1}/ds \\\\ d{u^2}/ds \\end{array} \\right] = [d{u^1}, d{u^2}] \\left[ \\begin{array}{cc} {\\textbf{r}_{11} } {\\textbf{n} } \u0026 {\\textbf{r}_{12} } {\\textbf{n} } \\\\ {\\textbf{r}_{21} } {\\textbf{n} } \u0026 {\\textbf{r}_{22} } {\\textbf{n} } \\end{array} \\right] \\left[ \\begin{array}{c} d{u^1} \\\\ d{u^2} \\end{array} \\right] / ds^2 = \\frac{II}{I} $$ So the whole expression is a function of $du/dv$, that is, a function of the “direction.” Normal curvature is the degree of bending at a point of a surface along a specified direction. Therefore, naturally, the directions where normal curvature reaches its maximum and minimum values are the principal directions of the surface at that point, and the corresponding normal curvatures are the principal curvatures of the surface at that point.\nFollowing the theory of curves, differential geometry needs to analyze the motion of frames. On a surface, this is the frame $\\lbrace {\\textbf{r}\\_{u^1} }, {\\textbf{r}\\_{u^2} }, {\\textbf{n} } \\rbrace$. We have:\n$$ \\begin{aligned} \\frac{\\partial {\\textbf{r}_{u^i} }}{\\partial u^j} \u0026= \\Gamma_{ij}^k {\\textbf{r}_{u^k} }+h_{ij} {\\textbf{n} } \\\\ \\frac{\\partial {\\textbf{n} }}{\\partial u^i} \u0026= -a_i^j \\textbf{r}_{u^j} \\end{aligned} $$ These are the frame equations of motion.\nWhy the second equation has no normal component:\nBecause $n$ is a unit normal vector, and the derivative of a unit normal vector is a vector in the tangent plane, so there is no normal component. That is:\n$$ {\\textbf{n} } \\cdot {\\textbf{n} } = 1 \\Rightarrow 2 {\\textbf{n}_{u^i} } \\cdot {\\textbf{n} } = 0 $$ Why there is a minus sign in front of the second equation: To make later conclusions look a bit nicer.\nThe $h\\_{ij}$ in the first equation can be obtained by dotting both sides with the normal vector. That is:\n$$ {\\textbf{r}_{u^i u^j} } \\cdot {\\textbf{n} } = h_{ij} $$ In other words, $h\\_{ij}$ is the coefficient of the second fundamental form.\nWeingarten Map For the second equation of motion above, the goal is to solve for $a\\_i^j$. First write the equation in matrix form:\n$$ \\left[ \\begin{array}{c} {\\textbf{n}_1}, {\\textbf{n}_2} \\end{array} \\right] = - \\left[ \\begin{array}{c} {\\textbf{r}_1}, {\\textbf{r}_2} \\end{array} \\right] A $$ To bring together the two fundamental forms, multiply both sides on the left by $[\\textbf{r}\\_1, \\textbf{r}\\_2]$:\n$$ \\left[ \\begin{array}{c} \\textbf{r}_1 \\\\ \\textbf{r}_2 \\end{array} \\right] \\left[ \\begin{array}{c} \\textbf{n}_1, \\textbf{n}_2 \\end{array} \\right] = -h_{ij} = - \\left[ \\begin{array}{c} \\textbf{r}_1 \\\\ \\textbf{r}_2 \\end{array} \\right] [\\textbf{r}_1, \\textbf{r}_2] A = - g A $$ Here $h$ is the second fundamental form matrix, and $g$ is the first fundamental form matrix. We get:\n$$ A=g^{-1}h $$ Define a linear map $W$ from $T\\_pS$ to $T\\_pS$ by sending the basis vectors to:\n$$ \\textbf{r}_i \\rightarrow -\\textbf{n}_i $$ The matrix of this map under the basis $\\lbrace {\\textbf{r}\\_{u^1} }, {\\textbf{r}\\_{u^2} }\\rbrace$ is exactly the matrix $A$ above. This linear map is called the Weingarten map on $TpS$, denoted by $W$.\nNow take a unit tangent vector ${v}=\\lambda\\_1 {\\textbf{r}\\_{u^1} } + \\lambda\\_2 {\\textbf{r}\\_{u^2} }$ at a point on the surface. Its normal curvature (at that point) was given above:\n$$ \\begin{aligned} \\kappa_n \u0026=[\\lambda_1, \\lambda_2]h_{ij}\\left[ \\begin{array}{c} \\lambda_1 \\\\ \\lambda_2 \\end{array} \\right] \\\\ \u0026= [\\lambda_1, \\lambda_2] \\left[ \\begin{array}{c} -{\\textbf{n}_{u^1} } \\\\ -{\\textbf{n}_{u^2} } \\end{array} \\right] [{\\textbf{r}_{u^1} }, {\\textbf{r}_{u^2} }] \\left[ \\begin{array}{c} \\lambda_1 \\\\ \\lambda_2 \\end{array} \\right] \\\\ \u0026= W({v}) \\cdot {v} \\end{aligned} $$ Some Properties of the Weingarten Map It is a self-adjoint transformation: $W({a}) \\cdot {b} = {a} \\cdot W({b})$. (The eigenvalues of a self-adjoint transformation are real.)\nThe eigenvalues and eigenvectors of the Weingarten map are precisely the principal curvatures of the surface at this point and their corresponding direction vectors.\nComputing Principal Directions and Principal Curvatures Start with a local parameterization ${\\textbf{r} }={\\textbf{r} }({u^1},{u^2})$, and compute the normal vector ${\\textbf{n} }$. Compute the matrices $g\\_{ij}$ and $h\\_{ij}$ of the two fundamental forms. For a two-dimensional surface, these correspond to the six parameters $EFGLMN$. Compute the Weingarten map matrix: $$ W=g^{-1}h=\\frac{1}{EG-F^2} \\left[ \\begin{array}{cc} E \u0026 -F \\\\ -F \u0026 G \\end{array} \\right] \\left[ \\begin{array}{cc} L \u0026 M \\\\ M \u0026 N \\end{array} \\right] $$ Compute the determinant of $W$: $$ K=det(W)=\\frac{det(h)}{det(g)}=\\frac{LN-M^2}{EG-F^2} $$ Mean curvature: $$ H=\\frac{1}{2}tr(W) $$ ","wordCount":"3166","inLanguage":"en","datePublished":"2021-10-07T00:00:00Z","dateModified":"2021-10-07T00:00:00Z","author":{"@type":"Person","name":"BlueHour"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://keqing996.github.io/posts/math/differentialgeometry/20211007_differentialgeometry/"},"publisher":{"@type":"Organization","name":"BlueHour","logo":{"@type":"ImageObject","url":"https://keqing996.github.io/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://keqing996.github.io/ accesskey=h title="BlueHour (Alt + H)">BlueHour</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://keqing996.github.io/posts/ title=Posts><span>Posts</span></a></li><li><a href=https://keqing996.github.io/categories/ title=Categories><span>Categories</span></a></li><li><a href=https://keqing996.github.io/tags/ title=Tags><span>Tags</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=https://keqing996.github.io/>Home</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=https://keqing996.github.io/posts/>Posts</a></nav><h1 class="post-title entry-hint-parent">Differential Geometry</h1><div class=post-meta><span title='2021-10-07 00:00:00 +0000 UTC'>2021-10-07</span>&nbsp;·&nbsp;<span>15 min</span>&nbsp;·&nbsp;<span>3166 words</span>&nbsp;·&nbsp;<span>BlueHour</span></div></header><details class=toc><summary accesskey=c title="(Alt + C)"><span class=title>Table of Contents</span></summary><div class=inner><nav id=TableOfContents><ul><li><a href=#theory-of-curves>Theory of Curves</a><ul><li><a href=#a-few-results-i-often-forget>A Few Results I Often Forget</a></li><li><a href=#regular-parametric-curves>Regular Parametric Curves</a></li><li><a href=#frenet-frame>Frenet Frame</a></li><li><a href=#frame-equations-of-motion>Frame Equations of Motion</a></li><li><a href=#fundamental-theorem-of-curve-theory>Fundamental Theorem of Curve Theory</a></li></ul></li><li><a href=#the-two-fundamental-forms-of-a-surface>The Two Fundamental Forms of a Surface</a><ul><li><a href=#the-first-fundamental-form-describes-metric-properties>The First Fundamental Form Describes Metric Properties</a></li><li><a href=#the-second-fundamental-form-describes-bending-properties>The Second Fundamental Form Describes Bending Properties</a></li></ul></li><li><a href=#equations-of-motion-and-structure-equations-of-surfaces>Equations of Motion and Structure Equations of Surfaces</a><ul><li><a href=#equations-of-motion>Equations of Motion</a></li><li><a href=#structure-equations>Structure Equations</a></li><li><a href=#number-of-independent-equations-in-the-structure-equations>Number of Independent Equations in the Structure Equations</a></li></ul></li><li><a href=#normal-curvature>Normal Curvature</a><ul><li><a href=#weingarten-map>Weingarten Map</a><ul><li><a href=#some-properties-of-the-weingarten-map>Some Properties of the Weingarten Map</a></li></ul></li><li><a href=#computing-principal-directions-and-principal-curvatures>Computing Principal Directions and Principal Curvatures</a></li></ul></li></ul></nav></div></details><div class="post-content md-content"><h1 id=theory-of-curves>Theory of Curves<a hidden class=anchor aria-hidden=true href=#theory-of-curves>#</a></h1><h2 id=a-few-results-i-often-forget>A Few Results I Often Forget<a hidden class=anchor aria-hidden=true href=#a-few-results-i-often-forget>#</a></h2><ol><li>Double cross product formula</li></ol><div class=math-display>$$
+(\vec{a} \times \vec{b}) \times \vec{c} =
+\vec{b} (\vec{a} \cdot \vec{c}) - \vec{a} (\vec{b} \cdot \vec{c})
+$$</div><ol start=2><li>Lagrange identity</li></ol><div class=math-display>$$
+(\vec{a} \times \vec{b}) (\vec{c} \times \vec{d})=
+(\vec{a}\cdot\vec{c})(\vec{b}\cdot\vec{d})-(\vec{a}\cdot\vec{d})(\vec{b}\cdot\vec{c})
+$$</div><ol start=3><li>Suppose the vector-valued function <span class=math-inline>${a}(t)$</span> is nowhere zero and continuously differentiable. Then the length of <span class=math-inline>${a}(t)$</span> is constant if and only if:</li></ol><div class=math-display>$$
+\vec{a}^{\prime}(t) \cdot \vec{a}(t) \equiv 0
+$$</div><h2 id=regular-parametric-curves>Regular Parametric Curves<a hidden class=anchor aria-hidden=true href=#regular-parametric-curves>#</a></h2><p>A parametric curve <span class=math-inline>${\textbf{r} }(t)$</span> is a regular parametric curve if it satisfies the following conditions:</p><ol><li><span class=math-inline>${\textbf{r} }(t)$</span> is at least a vector-valued function of the variable <span class=math-inline>$t$</span> with continuous derivatives up to order three.</li><li>Every point on the curve is a <strong>regular point</strong>; that is, for any <span class=math-inline>$t$</span>, <span class=math-inline>${\textbf{r} }^{\prime}(t) \neq 0$</span>.</li></ol><p>The direction in which the parameter increases is called the <strong>positive direction</strong> of the parametric curve.</p><p>For a regular parametric curve, <strong>arc length</strong> is an invariant of the curve:</p><div class=math-display>$$
+s=\int_{a}^{b}\vert {\textbf{r} }^{\prime}(t) \vert dt
+$$</div><p>Basically, we can think of <span class=math-inline>${\textbf{r} }^{\prime}(t)$</span> as velocity, and arc length is the distance obtained by integrating speed.</p><p>Also, the arc length <span class=math-inline>$s$</span> can be used as a parameter of the curve. If <span class=math-inline>$\vert {\textbf{r} }^{\prime}(t) \vert \equiv 1$</span>, it is called an <strong>arc-length parameter</strong>.</p><blockquote><p>Why arc length can be used as a curve parameter:</p><p>First we have:</p></blockquote><div class=math-display>$$
+\frac{ds}{dt}=\vert {\textbf{r} }^{\prime}(t) \vert > 0
+$$</div><blockquote><p>So <span class=math-inline>$s(t)$</span> is monotonically increasing with respect to <span class=math-inline>$t$</span>. Therefore <span class=math-inline>$s(t)$</span> has an inverse function <span class=math-inline>$t=t(s)$</span>, and hence <span class=math-inline>$s$</span> can be used as a parameter instead of <span class=math-inline>$t$</span>.</p></blockquote><p>If the curve is parameterized by arc length, that means the tangent vector field of the curve is a unit vector field. (Think of <span class=math-inline>${\textbf{r} }^{\prime}(t)$</span> as velocity: using an arc-length parameter means the motion has constant speed 1.)</p><h2 id=frenet-frame>Frenet Frame<a hidden class=anchor aria-hidden=true href=#frenet-frame>#</a></h2><p>Take a regular parametric curve <span class=math-inline>${\textbf{r} }(s)$</span>, with <span class=math-inline>$s$</span> chosen as the arc-length parameter. To build the frame:</p><ol><li><strong>Tangent vector</strong></li></ol><p>Differentiate <span class=math-inline>${\textbf{r} }(t)$</span> directly with respect to <span class=math-inline>$t$</span> to get the tangent vector:</p><div class=math-display>$$
+{\textbf{t} }(s)=\frac{d{\textbf{r} }}{ds}
+$$</div><ol start=2><li><strong>Principal normal vector</strong></li></ol><p>Since <span class=math-inline>$s$</span> is the arc-length parameter, <span class=math-inline>$\vert {\textbf{t} }(s) \vert = 1$</span>, namely <span class=math-inline>$&lt;{\textbf{t} }(s), {\textbf{t} }(s)>=1$</span>. Differentiating this gives <span class=math-inline>$&lt;{\textbf{t} }^{\prime}(s), {\textbf{t} }(s)>=0$</span>. So we have found a normal vector <span class=math-inline>${\textbf{t} }^{\prime}(s)$</span>. Although <span class=math-inline>$\vert {\textbf{t} }(s) \vert = 1$</span>, <span class=math-inline>$\vert {\textbf{t} }^{\prime}(s) \vert$</span> is not necessarily unit length. To make <span class=math-inline>${\textbf{n} }$</span> a unit vector, define the <strong>curvature</strong>:</p><div class=math-display>$$
+\kappa (s) = \vert \frac{d{\textbf{t} }}{ds} \vert
+$$</div><p>Then redefine the unit normal vector we found as:</p><div class=math-display>$$
+{\textbf{n} }=\frac{1}{\kappa (s)} \frac{d{\textbf{t} }}{ds}
+$$</div><ol start=3><li><strong>Binormal vector</strong></li></ol><p><span class=math-inline>${\textbf{t} }$</span> and <span class=math-inline>${\textbf{n} }$</span> are perpendicular, so define the binormal vector directly by the cross product:</p><div class=math-display>$$
+{\textbf{b} }={\textbf{t} } \times {\textbf{n} }
+$$</div><p>Differentiate the binormal vector once more:</p><div class=math-display>$$
+\frac{d{\textbf{b} }}{ds}=\frac{d{\textbf{t} }}{ds}\times {\textbf{n} } + {\textbf{t} }
+\times \frac{d{\textbf{n} }}{ds} = \kappa (s) {\textbf{n} } \times {\textbf{n} } +
+{\textbf{t} }\times \frac{d{\textbf{n} }}{ds} = {\textbf{t} }\times \frac{d{\textbf{n} }}{ds}
+$$</div><p>That is, <span class=math-inline>$d{\textbf{b} } / ds$</span> is perpendicular to the tangent vector <span class=math-inline>${\textbf{t} }$</span>, so <span class=math-inline>$d{\textbf{b} } / ds$</span> must be parallel to <span class=math-inline>${\textbf{n} }$</span>. Thus set:</p><div class=math-display>$$
+\frac{d{\textbf{b} }}{ds}=- \tau (s) {\textbf{n} }
+$$</div><p>Multiply both sides by <span class=math-inline>${\textbf{n} }$</span>. Since it is a unit vector, we get:</p><div class=math-display>$$
+\tau (s)=-\frac{d{\textbf{b} }}{ds} \cdot {\textbf{n} }
+$$</div><p>This is called the <strong>torsion</strong> of the curve. It measures how much the curve deviates from being planar.</p><p>In summary, the Frenet frame of a curve is <span class=math-inline>$\lbrace {\textbf{r} }; {\textbf{t} },{\textbf{n} },{\textbf{b} }\rbrace$</span>.</p><p><img loading=lazy src=/posts/math/differentialgeometry/20211007_differentialgeometry/assets/image-kE9zG9gG7nC5.png></p><h2 id=frame-equations-of-motion>Frame Equations of Motion<a hidden class=anchor aria-hidden=true href=#frame-equations-of-motion>#</a></h2><p>This just means differentiating the Frenet frame. Since the frame itself is an orthonormal basis, after differentiation it can still be expressed linearly in terms of the frame itself. The result is:</p><div class=math-display>$$
+\frac{d}{ds} \left[ \begin{array}{c}
+{\textbf{t} } \\
+{\textbf{n} } \\
+{\textbf{b} }
+\end{array} \right] = \left[ \begin{array}{ccc}
+& \kappa (s) & \\
+-\kappa (s) & & \tau (s) \\
+& -\tau (s) &
+\end{array} \right] \left[ \begin{array}{c}
+{\textbf{t} } \\
+{\textbf{n} } \\
+{\textbf{b} }
+\end{array} \right]
+$$</div><blockquote><p>The first row follows directly from the definition. The third row also follows directly from the definition of torsion above.</p><p>For the second row, differentiate both sides of <span class=math-inline>${\textbf{n} }={\textbf{b} } \times {\textbf{t} }$</span>.</p></blockquote><h2 id=fundamental-theorem-of-curve-theory>Fundamental Theorem of Curve Theory<a hidden class=anchor aria-hidden=true href=#fundamental-theorem-of-curve-theory>#</a></h2><p>That is: up to rigid motions, curvature and torsion uniquely determine a curve (for a regular arc-length parameterized curve, with curvature nowhere zero).</p><p>The essence of the proof is to show that the frame equations of motion have a unique solution, and that the solution is indeed a regular curve parameterized by arc length.</p><h1 id=the-two-fundamental-forms-of-a-surface>The Two Fundamental Forms of a Surface<a hidden class=anchor aria-hidden=true href=#the-two-fundamental-forms-of-a-surface>#</a></h1><p>A surface is usually written as <span class=math-inline>$\textbf{r}=\textbf{r}({u^1},{u^2})$</span> or <span class=math-inline>$\textbf{r}=\textbf{r}(u,v)$</span>. To make the later Einstein summation notation convenient, I will use the first notation directly. Also, partial derivatives are denoted by <span class=math-inline>$\textbf{r}\_{u^i}$</span>, or more simply by <span class=math-inline>$\textbf{r}\_i$</span>.</p><p><strong>Regular parametric surface</strong>:</p><ol><li>The continuous map <span class=math-inline>$S \rightarrow R^3$</span> is a homeomorphism.</li><li>It is smooth and differentiable at least three times.</li><li><strong>Regularity</strong>: the map is injective; equivalently, the Jacobi matrix has full rank; equivalently, <span class=math-inline>$\textbf{r}\_{u^1}$</span> and <span class=math-inline>$\textbf{r}\_{u^2}$</span> are linearly independent.</li></ol><blockquote><p>Why require a homeomorphism: a one-to-one map alone is not enough. Two points that are very close in <span class=math-inline>$R^2$</span> might be mapped very far apart in <span class=math-inline>$R^3$</span>. So we want the differential structure to be controlled as well, and that is why we require a homeomorphism.</p></blockquote><p>The definition of a surface above is local. The full definition of a surface is obtained by gluing together locally defined surface patches. For planes and cylinders, the local definition can be equivalent to a global one, but for spheres and similar surfaces it cannot. Spheres, tori, and so on are bounded closed subsets of <span class=math-inline>$R^3$</span>, hence compact sets, so we cannot find an open set homeomorphic to the whole surface.</p><p>For a regular parametric surface, <span class=math-inline>$\textbf{r}\_u$</span> and <span class=math-inline>$\textbf{r}\_v$</span> are two tangent vectors. They are linearly independent, and the space they span is the <strong>tangent space</strong>, <span class=math-inline>$T\_pS\lbrace \textbf{r}\_{u^1},\textbf{r}\_{u^2}\rbrace$</span>. The cross product of the two tangent vectors gives a normal vector (which needs to be normalized), <span class=math-inline>$\textbf{n}= \textbf{r}\_{u^1} \times \textbf{r}\_{u^2} / \vert \textbf{r}\_{u^1} \times \textbf{r}\_{u^2} \vert$</span>. Therefore the two tangent vectors together with the normal vector form the <strong>natural frame</strong> of the surface, <span class=math-inline>$\lbrace \textbf{r}\_{u^1}, \textbf{r}\_{u^2}, \textbf{n} \rbrace$</span>.</p><p>For <span class=math-inline>$\textbf{r}=\textbf{r}({u^1},{u^2})$</span>, take the first differential:</p><div class=math-display>$$
+d \textbf{r}=\textbf{r}_{u^1} d{u^1} + \textbf{r}_{u^2} d{u^2}
+$$</div><p>Then the <strong>first fundamental form</strong> is the square of the length of the tangent vector <span class=math-inline>$d{\textbf{r} }$</span>:</p><div class=math-display>$$
+I=\langle d\textbf{r}, d\textbf{r}\rangle=[d{u^1}, d{u^2}]
+\left[ \begin{array}{cc}
+{\textbf{r}_1} {\textbf{r}_1} & {\textbf{r}_1} {\textbf{r}_2} \\
+{\textbf{r}_2} {\textbf{r}_1} & {\textbf{r}_2} {\textbf{r}_2}
+\end{array} \right]
+\left[ \begin{array}{c}
+d{u^1} \\
+d{u^2}
+\end{array} \right]=g_{ij}du^idu^j
+$$</div><p>Here <span class=math-inline>$g\_{ij}$</span> denotes the coefficient matrix of the first fundamental form. The <strong>second fundamental form</strong> is:</p><div class=math-display>$$
+\begin{aligned}
+II &= -\langle d{\textbf{r} } , d{\textbf{n} }\rangle=[d{u^1}, d{u^2}]
+\left[ \begin{array}{cc}
+-{\textbf{r}_1} {\textbf{n}_1} & -{\textbf{r}_1} {\textbf{n}_2} \\
+-{\textbf{r}_2} {\textbf{n}_1} & -{\textbf{r}_2} {\textbf{n}_2}
+\end{array} \right]
+\left[ \begin{array}{c}
+d{u^1} \\ d{u^2}\end{array} \right] \\ &= [d{u^1}, d{u^2}]
+\left[ \begin{array}{cc}
+{\textbf{r}_{11} } {\textbf{n} } & {\textbf{r}_{12} } {\textbf{n} } \\
+{\textbf{r}_{21} } {\textbf{n} } & {\textbf{r}_{22} } {\textbf{n} }
+\end{array} \right]
+\left[ \begin{array}{c}
+d{u^1} \\
+d{u^2}
+\end{array} \right]\\ &=h_{ij}du^idu^j
+\end{aligned}
+$$</div><p>Here <span class=math-inline>$h\_{ij}$</span> denotes the coefficient matrix of the second fundamental form. The equality between corresponding entries of the two matrices above uses:</p><div class=math-display>$$
+\langle\textbf{r}_1, \textbf{n}\rangle = 0 \\
+\langle\textbf{r}_2, \textbf{n}\rangle = 0
+$$</div><p>Just take partial derivatives on both sides of these two equations.</p><h2 id=the-first-fundamental-form-describes-metric-properties>The First Fundamental Form Describes Metric Properties<a hidden class=anchor aria-hidden=true href=#the-first-fundamental-form-describes-metric-properties>#</a></h2><p>The area element at a point of the surface is:</p><div class=math-display>$$
+dA=\vert {\textbf{r}_1} \times {\textbf{r}_2} \vert = \sqrt{ {\textbf{r}_1} {\textbf{r}_1} \cdot {\textbf{r}_2} {\textbf{r}_2} - ({\textbf{r}_1} {\textbf{r}_2})^2}dudv
+$$</div><p>The first fundamental form is always positive definite.</p><h2 id=the-second-fundamental-form-describes-bending-properties>The Second Fundamental Form Describes Bending Properties<a hidden class=anchor aria-hidden=true href=#the-second-fundamental-form-describes-bending-properties>#</a></h2><p>Using the usual <span class=math-inline>$(u,v)$</span> notation for <span class=math-inline>$(u^1,u^2)$</span>, take a small displacement on the surface <span class=math-inline>$S$</span> from the point <span class=math-inline>$(u\_0,v\_0)$</span> to <span class=math-inline>$(u\_0+\Delta u,v\_0+\Delta v)$</span>. We look at how much this displacement differs in the normal direction at the initial point of the normal line, namely:</p><div class=math-display>$$
+\begin{aligned}
+\delta(\Delta u, \Delta v) &= ({\textbf{r} }(u_0+\Delta u,v_0+\Delta v)-{\textbf{r} }(u_0,v_0))\cdot {\textbf{n} } \\ &= [({\textbf{r}_u} \Delta u + {\textbf{r}_v} \Delta v)
+{}+ \frac{1}{2}({\textbf{r}_{uu} } (\Delta u)^2 + 2 {\textbf{r}_{uv} }\Delta u \Delta v + {\textbf{r}_{vv} } (\Delta v)^2) + o ((\Delta u)^2 + (\Delta v)^2)] \cdot {\textbf{n} }
+\end{aligned}
+$$</div><p>Take the limit of the expression above. The first expanded term lies in the tangent plane, so its inner product with the normal is directly 0. The third term is a higher-order infinitesimal and vanishes in the limit. What remains is the inner product of the second term with the normal, which is exactly the second fundamental form.</p><p>The second fundamental form may be positive definite or negative definite; it may also be indefinite or degenerate.</p><h1 id=equations-of-motion-and-structure-equations-of-surfaces>Equations of Motion and Structure Equations of Surfaces<a hidden class=anchor aria-hidden=true href=#equations-of-motion-and-structure-equations-of-surfaces>#</a></h1><h2 id=equations-of-motion>Equations of Motion<a hidden class=anchor aria-hidden=true href=#equations-of-motion>#</a></h2><p>With the natural frame <span class=math-inline>$\lbrace \textbf{r}\_{u^1}, \textbf{r}\_{u^2}, \textbf{n} \rbrace$</span> in hand, we can now derive the equations of motion for a surface. We have:</p><div class=math-display>$$
+\left\lbrace \begin{aligned}
+\partial_j \textbf{r}_i &= \Gamma_{ij}^k \textbf{r}_k + \Lambda_{ij} \textbf{n} \\
+\partial_i \textbf{n} &= \Theta_i^j \textbf{r}_j + \Delta_i \textbf{n}
+\end{aligned} \right.
+$$</div><p>Now compute <span class=math-inline>$\Gamma,\Lambda,\Theta,\Delta$</span> one by one:</p><p>For the second equation, since <span class=math-inline>$\textbf{n}$</span> is a unit normal vector, the derivative of the unit normal vector is a vector in the tangent plane and has no normal component. That is:</p><div class=math-display>$$
+{\textbf{n} } \cdot {\textbf{n} } = 1 \Rightarrow 2 {\textbf{n}_{u^i} } \cdot {\textbf{n} } = 0
+$$</div><p>Therefore:</p><div class=math-display>$$
+\Delta_i = 0
+$$</div><p>For the second equation, take the inner product of both sides with <span class=math-inline>$\textbf{r}\_k$</span>:</p><div class=math-display>$$
+\langle\textbf{n}_i, \textbf{r}_k\rangle = -\langle\textbf{n}, \textbf{r}_{ik}\rangle = \Theta_i^j \langle\textbf{r}_j, \textbf{r}_k\rangle
+$$</div><p>That is:</p><div class=math-display>$$
+\Theta_i^j g_{jk}=-h_{ik}
+$$</div><p>So:</p><div class=math-display>$$
+\Theta_i^j=-g^{jk}h_{ik}
+$$</div><blockquote><p>Here <span class=math-inline>$g^{ik}$</span> is the inverse matrix of <span class=math-inline>$g\_{ik}$</span>. It is just a notation. We have <span class=math-inline>$g^{ik}g\_{ik}=\delta\_i^k$</span>.</p></blockquote><p>For convenience later, write:</p><div class=math-display>$$
+a_i^j=g^{jk}h_{ik}
+$$</div><p>Then the second equation finally becomes (here I pull out the minus sign, which makes later manipulations cleaner):</p><div class=math-display>$$
+\partial_i \textbf{n} = -a_i^j \textbf{r}_j
+$$</div><p>Now look at the first equation. Take the inner product of both sides with <span class=math-inline>$\textbf{n}$</span>:</p><div class=math-display>$$
+\langle\textbf{r}_{ij},\textbf{n}\rangle=\Gamma_{ij}^k \langle\textbf{r}_k, \textbf{n}\rangle+\Lambda_{ij}\langle\textbf{n},\textbf{n}\rangle=\Lambda_{ij}
+$$</div><p>Therefore:</p><div class=math-display>$$
+\Lambda_{ij}=h_{ij}
+$$</div><p>The only thing left is <span class=math-inline>$\Gamma$</span>. Take the inner product of both sides with <span class=math-inline>$\textbf{r}\_m$</span>:</p><div class=math-display>$$
+\langle\textbf{r}_{ij}, \textbf{r}_m\rangle=\Gamma_{ij}^k \langle\textbf{r}_k, \textbf{r}_m\rangle=\Gamma_{ij}^k g_{km}
+$$</div><p>To compute <span class=math-inline>$\langle\textbf{r}\_{ij}, \textbf{r}\_m\rangle$</span>, consider:</p><div class=math-display>$$
+\partial_i \langle\textbf{r}_j, \textbf{r}_m\rangle = \partial_i g_{jm} = \langle\textbf{r}_{ij}, \textbf{r}_m\rangle + \langle\textbf{r}_j, \textbf{r}_{im}\rangle
+$$</div><p>Cycling the indices gives two more equations:</p><div class=math-display>$$
+\begin{aligned}
+\partial_j \langle\textbf{r}_i, \textbf{r}_m\rangle &= \partial_j g_{im} = \langle\textbf{r}_{ij}, \textbf{r}_m\rangle + \langle\textbf{r}_i, \textbf{r}_{jm}\rangle \\
+\partial_m \langle\textbf{r}_i, \textbf{r}_j\rangle &= \partial_m g_{ij} = \langle\textbf{r}_{im}, \textbf{r}_j\rangle + \langle\textbf{r}_i, \textbf{r}_{jm}\rangle
+\end{aligned}
+$$</div><p>Add the first two equations and subtract the third, and we can solve for <span class=math-inline>$\langle\textbf{r}\_{ij}, \textbf{r}\_m\rangle$</span>:</p><div class=math-display>$$
+\langle\textbf{r}_{ij}, \textbf{r}_m\rangle = \frac{1}{2} (\partial_i g_{jm} + \partial_i g_{im} - \partial_i g_{ij})
+$$</div><p>So we have:</p><div class=math-display>$$
+\Gamma_{ij}^k=\frac{1}{2} g^{km} (\partial_i g_{jm} + \partial_j g_{im} - \partial_m g_{ij})
+$$</div><p>Finally, the equations of motion for a surface are:</p><div class=math-display>$$
+\left\lbrace \begin{aligned}
+\textbf{r}_{ij} &= \Gamma_{ij}^k \textbf{r}_k + h_{ij} \textbf{n} \\
+\textbf{n}_i &= -a_i^j \textbf{r}_j
+\end{aligned} \right.
+$$</div><p>where:</p><div class=math-display>$$
+\left\lbrace \begin{aligned}
+\Gamma_{ij}^k &= \frac{1}{2} g^{km} (\partial_i g_{jm} + \partial_j g_{im} - \partial_m g_{ij}) \\
+a_i^j &= g^{jk}h_{ik}
+\end{aligned} \right.
+$$</div><h2 id=structure-equations>Structure Equations<a hidden class=anchor aria-hidden=true href=#structure-equations>#</a></h2><p>Next, derive the structure equations of a surface. <code>The idea is the commutativity of second and third partial derivatives</code>. Differentiate the first equation of motion once more:</p><div class=math-display>$$
+\begin{aligned}
+\textbf{r}_{ijm} &= (\partial_m\Gamma_{ij}^k) \textbf{r}_k + \Gamma_{ij}^k \textbf{r}_{km} + (\partial_m h_{ij}) \textbf{n} + h_{ij} \textbf{n}_m \\
+&= (\partial_m\Gamma_{ij}^k) \textbf{r}_k + \Gamma_{ij}^k (\Gamma_{km}^t \textbf{r}_t + h_{km} \textbf{n}) + (\partial_m h_{ij}) \textbf{n} - h_{ij}(a_m^t \textbf{r}_t) \\
+&= (\partial_m\Gamma_{ij}^t + \Gamma_{ij}^k \Gamma_{km}^t - h_{ij} a_m^t)\textbf{r}_t + (\Gamma_{ij}^k h_{km} + \partial_m h_{ij}) \textbf{n}
+\end{aligned}
+$$</div><p>Swap the order of differentiation in the last two indices:</p><div class=math-display>$$
+\begin{aligned}
+\textbf{r}_{imj} &= (\partial_j\Gamma_{im}^t + \Gamma_{im}^k \Gamma_{kj}^t - h_{im} a_j^t)\textbf{r}_t + (\Gamma_{im}^k h_{kj} + \partial_j h_{im}) \textbf{n}
+\end{aligned}
+$$</div><p>The two expressions should be equal, so the corresponding tangential and normal parts must be equal respectively:</p><div class=math-display>$$
+\left \lbrace \begin{aligned}
+& \partial_m\Gamma_{ij}^t + \Gamma_{ij}^k \Gamma_{km}^t - \partial_j\Gamma_{im}^t - \Gamma_{im}^k \Gamma_{kj}^t
+= (h_{ij} h_{mp} - h_{im} h_{jp}) g^{pt} \\
+& \partial_m h_{ij} - \partial_j h_{im} = \Gamma_{im}^k h_{kj} - \Gamma_{ij}^k h_{km}
+\end{aligned} \right.
+$$</div><p>The first equation, from the tangential part, is called the <strong>Gauss equation</strong>. The second equation, from the normal part, is called the <strong>Codazzi equation</strong>. These two equations are necessary conditions for forming a parametric surface.</p><p>Similarly, we can perform the same operation on the second equation of motion, but it still gives the Codazzi equation and no new equation appears.</p><h2 id=number-of-independent-equations-in-the-structure-equations>Number of Independent Equations in the Structure Equations<a hidden class=anchor aria-hidden=true href=#number-of-independent-equations-in-the-structure-equations>#</a></h2><h1 id=normal-curvature>Normal Curvature<a hidden class=anchor aria-hidden=true href=#normal-curvature>#</a></h1><p>This comes from studying the curvature vector of a curve on a surface. Let the curve be <span class=math-inline>${\textbf{r} }(s)={\textbf{r} }({u^1}(s),{u^2}(s))$</span>, where <span class=math-inline>$s$</span> is the arc-length parameter. Then the unit tangent vector on the curve is:</p><div class=math-display>$$
+{\textbf{t} }(s) = \frac{d{\textbf{r} }}{ds}={\textbf{r}_{u^1} } \frac{d{u^1} }{ds} + {\textbf{r}_{u^2} } \frac{d{u^2} }{ds}
+$$</div><p>Differentiate once more to get the curvature vector:</p><div class=math-display>$$
+\frac{d{\textbf{t} }}{ds}=\kappa {\textbf{n}_{curve} }(s) =
+\frac{d^2{\textbf{r} }}{ds^2}={\textbf{r}_{u^1} } \frac{d^2{u^1} }{ds^2} + {\textbf{r}_{u^2} } \frac{d^2{u^2} }{ds^2} + {\textbf{r}_{ {u^1}{u^1} }} (\frac{d{u^1} }{ds})^2 + 2{\textbf{r}_{ {u^1}{u^2} }}\frac{d{u^1} }{ds}\frac{d{u^2} }{ds}+
+{\textbf{r}_{ {u^2}{u^2} }} (\frac{d{u^2} }{ds})^2
+$$</div><p>This vector (<code>the normal vector of the curve</code>) can be decomposed into two parts: a tangential part and a normal part relative to the surface. The normal part is the <strong>normal curvature</strong>, measuring the bending of the surface relative to <span class=math-inline>$R^3$</span>; the tangential part is the <strong>geodesic curvature</strong>, measuring how the curve bends relative to the surface.</p><p>So we examine the normal direction. Take the dot product of the expression above with the surface normal vector <span class=math-inline>${\textbf{n} }$</span>:</p><div class=math-display>$$
+\frac{d{\textbf{t} }}{ds} \cdot {\textbf{n} } = [\frac{d{u^1} }{ds}, \frac{d{u^2} }{ds}]
+\left[ \begin{array}{cc}
+{\textbf{r}_{11} } {\textbf{n} } & {\textbf{r}_{12} } {\textbf{n} } \\
+{\textbf{r}_{21} } {\textbf{n} } & {\textbf{r}_{22} } {\textbf{n} }
+\end{array} \right]
+\left[ \begin{array}{c}
+d{u^1}/ds \\
+d{u^2}/ds
+\end{array} \right] = \kappa_n
+$$</div><p>The defined <span class=math-inline>$\kappa\_n$</span> is the normal curvature of the surface at this point along the chosen unit tangent vector. We can see that:</p><ol><li>The value of the normal curvature depends on the selected point.</li><li>The normal curvature depends only on the second fundamental form.</li><li>The normal curvature depends on the tangent vector at the point under consideration (because we study it through curves on the surface), but it does not depend on the particular curve. If two different curves have the same tangent vector at this point, then their normal curvature is the same.</li></ol><blockquote><p>Note that the derivation of normal curvature is based on a unit tangent vector at a point:</p></blockquote><div class=math-display>$$
+\frac{d{\textbf{r} }}{ds}={\textbf{r}_1} \frac{d{u^1} }{ds} + {\textbf{r}_2} \frac{d{u^2} }{ds}
+$$</div><blockquote><p>Given a unit tangent vector <span class=math-inline>${v}=\lambda\_1 {\textbf{r}\_1} + \lambda\_2 {\textbf{r}\_2}$</span>, the pair <span class=math-inline>$\lbrace \lambda\_1, \lambda\_2 \rbrace$</span> corresponds to <span class=math-inline>$\lbrace du^1/ds, du^2/ds\rbrace$</span>. So the normal curvature is also:</p></blockquote><div class=math-display>$$
+\kappa_n=[\lambda_1, \lambda_2]h_{ij}[\lambda_1, \lambda_2]^T=\lambda^i \lambda^j h_{ij}
+$$</div><blockquote><p>where <span class=math-inline>$h\_{ij}$</span> is the coefficient matrix of the second fundamental form.</p></blockquote><p>Next, change the form a bit so that normal curvature becomes a function of the &ldquo;direction&rdquo; at a point on the surface.</p><div class=math-display>$$
+\kappa_n = [\frac{d{u^1} }{ds}, \frac{d{u^2} }{ds}]
+\left[ \begin{array}{cc}
+{\textbf{r}_{11} } {\textbf{n} } & {\textbf{r}_{12} } {\textbf{n} } \\
+{\textbf{r}_{21} } {\textbf{n} } & {\textbf{r}_{22} } {\textbf{n} }
+\end{array} \right]
+\left[ \begin{array}{c}
+d{u^1}/ds \\
+d{u^2}/ds
+\end{array} \right] = [d{u^1}, d{u^2}]
+\left[ \begin{array}{cc}
+{\textbf{r}_{11} } {\textbf{n} } & {\textbf{r}_{12} } {\textbf{n} } \\
+{\textbf{r}_{21} } {\textbf{n} } & {\textbf{r}_{22} } {\textbf{n} }
+\end{array} \right]
+\left[ \begin{array}{c}
+d{u^1} \\
+d{u^2}
+\end{array} \right] / ds^2 = \frac{II}{I}
+$$</div><p>So the whole expression is a function of <span class=math-inline>$du/dv$</span>, that is, a function of the &ldquo;direction.&rdquo; <code>Normal curvature is the degree of bending at a point of a surface along a specified direction</code>. Therefore, naturally, the directions where normal curvature reaches its maximum and minimum values are the <strong>principal directions</strong> of the surface at that point, and the corresponding normal curvatures are the <strong>principal curvatures</strong> of the surface at that point.</p><p>Following the theory of curves, differential geometry needs to analyze the motion of frames. On a surface, this is the frame <span class=math-inline>$\lbrace {\textbf{r}\_{u^1} }, {\textbf{r}\_{u^2} }, {\textbf{n} } \rbrace$</span>. We have:</p><div class=math-display>$$
+\begin{aligned}
+\frac{\partial {\textbf{r}_{u^i} }}{\partial u^j} &= \Gamma_{ij}^k {\textbf{r}_{u^k} }+h_{ij} {\textbf{n} } \\
+\frac{\partial {\textbf{n} }}{\partial u^i} &= -a_i^j \textbf{r}_{u^j}
+\end{aligned}
+$$</div><p>These are the frame equations of motion.</p><blockquote><p>Why the second equation has no normal component:</p><p>Because <span class=math-inline>$n$</span> is a unit normal vector, and the derivative of a unit normal vector is a vector in the tangent plane, so there is no normal component. That is:</p></blockquote><div class=math-display>$$
+{\textbf{n} } \cdot {\textbf{n} } = 1 \Rightarrow 2 {\textbf{n}_{u^i} } \cdot {\textbf{n} } = 0
+$$</div><blockquote><p>Why there is a minus sign in front of the second equation:
+To make later conclusions look a bit nicer.</p></blockquote><p>The <span class=math-inline>$h\_{ij}$</span> in the first equation can be obtained by dotting both sides with the normal vector. That is:</p><div class=math-display>$$
+{\textbf{r}_{u^i u^j} } \cdot {\textbf{n} } = h_{ij}
+$$</div><p>In other words, <span class=math-inline>$h\_{ij}$</span> is the coefficient of the second fundamental form.</p><h2 id=weingarten-map>Weingarten Map<a hidden class=anchor aria-hidden=true href=#weingarten-map>#</a></h2><p>For the second equation of motion above, the goal is to solve for <span class=math-inline>$a\_i^j$</span>. First write the equation in matrix form:</p><div class=math-display>$$
+\left[ \begin{array}{c} {\textbf{n}_1}, {\textbf{n}_2} \end{array} \right] = -
+\left[ \begin{array}{c} {\textbf{r}_1}, {\textbf{r}_2} \end{array} \right] A
+$$</div><p>To bring together the two fundamental forms, multiply both sides on the left by <span class=math-inline>$[\textbf{r}\_1, \textbf{r}\_2]$</span>:</p><div class=math-display>$$
+\left[ \begin{array}{c} \textbf{r}_1 \\ \textbf{r}_2 \end{array} \right]
+\left[ \begin{array}{c} \textbf{n}_1, \textbf{n}_2 \end{array} \right]
+= -h_{ij} = - \left[ \begin{array}{c} \textbf{r}_1 \\ \textbf{r}_2 \end{array} \right]
+[\textbf{r}_1, \textbf{r}_2] A = - g A
+$$</div><p>Here <span class=math-inline>$h$</span> is the second fundamental form matrix, and <span class=math-inline>$g$</span> is the first fundamental form matrix. We get:</p><div class=math-display>$$
+A=g^{-1}h
+$$</div><p>Define a linear map <span class=math-inline>$W$</span> from <span class=math-inline>$T\_pS$</span> to <span class=math-inline>$T\_pS$</span> by sending the basis vectors to:</p><div class=math-display>$$
+\textbf{r}_i \rightarrow -\textbf{n}_i
+$$</div><p>The matrix of this map under the basis <span class=math-inline>$\lbrace {\textbf{r}\_{u^1} }, {\textbf{r}\_{u^2} }\rbrace$</span> is exactly the matrix <span class=math-inline>$A$</span> above. This linear map is called the <strong>Weingarten map</strong> on <span class=math-inline>$TpS$</span>, denoted by <span class=math-inline>$W$</span>.</p><p>Now take a unit tangent vector <span class=math-inline>${v}=\lambda\_1 {\textbf{r}\_{u^1} } + \lambda\_2 {\textbf{r}\_{u^2} }$</span> at a point on the surface. Its normal curvature (at that point) was given above:</p><div class=math-display>$$
+\begin{aligned} \kappa_n &=[\lambda_1, \lambda_2]h_{ij}\left[ \begin{array}{c} \lambda_1 \\ \lambda_2 \end{array} \right] \\
+&= [\lambda_1, \lambda_2]
+\left[ \begin{array}{c} -{\textbf{n}_{u^1} } \\ -{\textbf{n}_{u^2} } \end{array} \right]
+[{\textbf{r}_{u^1} }, {\textbf{r}_{u^2} }]
+\left[ \begin{array}{c} \lambda_1 \\ \lambda_2 \end{array} \right] \\
+&= W({v}) \cdot {v}
+\end{aligned}
+$$</div><h3 id=some-properties-of-the-weingarten-map>Some Properties of the Weingarten Map<a hidden class=anchor aria-hidden=true href=#some-properties-of-the-weingarten-map>#</a></h3><p>It is a self-adjoint transformation: <span class=math-inline>$W({a}) \cdot {b} = {a} \cdot W({b})$</span>. (The eigenvalues of a self-adjoint transformation are real.)</p><p><code>The eigenvalues and eigenvectors of the Weingarten map are precisely the principal curvatures of the surface at this point and their corresponding direction vectors</code>.</p><h2 id=computing-principal-directions-and-principal-curvatures>Computing Principal Directions and Principal Curvatures<a hidden class=anchor aria-hidden=true href=#computing-principal-directions-and-principal-curvatures>#</a></h2><ol><li>Start with a local parameterization <span class=math-inline>${\textbf{r} }={\textbf{r} }({u^1},{u^2})$</span>, and compute the normal vector <span class=math-inline>${\textbf{n} }$</span>.</li><li>Compute the matrices <span class=math-inline>$g\_{ij}$</span> and <span class=math-inline>$h\_{ij}$</span> of the two fundamental forms. For a two-dimensional surface, these correspond to the six parameters <span class=math-inline>$EFGLMN$</span>.</li><li>Compute the Weingarten map matrix:</li></ol><div class=math-display>$$
+W=g^{-1}h=\frac{1}{EG-F^2}
+\left[ \begin{array}{cc} E & -F \\ -F & G \end{array} \right]
+\left[ \begin{array}{cc} L & M \\ M & N \end{array} \right]
+$$</div><ol start=4><li>Compute the determinant of <span class=math-inline>$W$</span>:</li></ol><div class=math-display>$$
+K=det(W)=\frac{det(h)}{det(g)}=\frac{LN-M^2}{EG-F^2}
+$$</div><ol start=5><li>Mean curvature:</li></ol><div class=math-display>$$
+H=\frac{1}{2}tr(W)
+$$</div></div><footer class=post-footer><ul class=post-tags></ul><nav class=paginav><a class=prev href=https://keqing996.github.io/posts/programming/20211022_openglwithsfml/><span class=title>« Prev</span>
+<span>Getting Started with OpenGL Using SFML</span>
+</a><a class=next href=https://keqing996.github.io/posts/math/topology/20210905_homogeneouscoordinatesprojectivegeometry/><span class=title>Next »</span>
+<span>Topology 05 - Homogeneous Coordinates and Projective Geometry</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://keqing996.github.io/>BlueHour</a></span> ·
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
+</a><script type=module>
+    const mermaidBlocks = document.querySelectorAll(".mermaid");
+    if (mermaidBlocks.length) {
+        const { default: mermaid } = await import("https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs");
+
+        const getMermaidMode = () => {
+            const theme = document.documentElement.dataset.theme;
+            if (theme === "dark") {
+                return "dark";
+            }
+            if (theme === "light") {
+                return "light";
+            }
+            return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        };
+
+        const mermaidThemes = {
+            light: {
+                background: "transparent",
+                primaryColor: "#eef6ff",
+                primaryTextColor: "#102033",
+                primaryBorderColor: "#3b82f6",
+                secondaryColor: "#eefcf6",
+                secondaryTextColor: "#102033",
+                secondaryBorderColor: "#10b981",
+                tertiaryColor: "#fff7ed",
+                tertiaryTextColor: "#102033",
+                tertiaryBorderColor: "#f59e0b",
+                mainBkg: "#f8fbff",
+                secondBkg: "#f3fbf7",
+                lineColor: "#64748b",
+                textColor: "#102033",
+                clusterBkg: "#f8fafc",
+                clusterBorder: "#cbd5e1",
+                edgeLabelBackground: "#ffffff",
+                fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                actorBkg: "#f8fbff",
+                actorBorder: "#3b82f6",
+                actorTextColor: "#102033",
+                actorLineColor: "#94a3b8",
+                signalColor: "#475569",
+                signalTextColor: "#102033",
+                noteBkgColor: "#fff7ed",
+                noteBorderColor: "#f59e0b",
+                noteTextColor: "#102033",
+                activationBkgColor: "#e0f2fe",
+                activationBorderColor: "#0284c7",
+                sequenceNumberColor: "#ffffff"
+            },
+            dark: {
+                background: "transparent",
+                primaryColor: "#172b45",
+                primaryTextColor: "#e5edf8",
+                primaryBorderColor: "#60a5fa",
+                secondaryColor: "#123527",
+                secondaryTextColor: "#e5edf8",
+                secondaryBorderColor: "#34d399",
+                tertiaryColor: "#3b2a18",
+                tertiaryTextColor: "#f8ead4",
+                tertiaryBorderColor: "#f59e0b",
+                mainBkg: "#111827",
+                secondBkg: "#10251d",
+                lineColor: "#94a3b8",
+                textColor: "#e5edf8",
+                clusterBkg: "#202226",
+                clusterBorder: "#475569",
+                edgeLabelBackground: "#1f2937",
+                fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                actorBkg: "#172b45",
+                actorBorder: "#60a5fa",
+                actorTextColor: "#e5edf8",
+                actorLineColor: "#64748b",
+                signalColor: "#cbd5e1",
+                signalTextColor: "#e5edf8",
+                noteBkgColor: "#3b2a18",
+                noteBorderColor: "#f59e0b",
+                noteTextColor: "#f8ead4",
+                activationBkgColor: "#0f3a54",
+                activationBorderColor: "#38bdf8",
+                sequenceNumberColor: "#111827"
+            }
+        };
+
+        const getMermaidConfig = () => ({
+            startOnLoad: false,
+            theme: "base",
+            look: "classic",
+            securityLevel: "strict",
+            themeVariables: mermaidThemes[getMermaidMode()],
+            flowchart: {
+                curve: "basis",
+                htmlLabels: true,
+                nodeSpacing: 44,
+                padding: 18,
+                rankSpacing: 58
+            },
+            sequence: {
+                actorMargin: 72,
+                boxMargin: 8,
+                boxTextMargin: 6,
+                messageMargin: 44,
+                mirrorActors: false,
+                noteMargin: 14
+            }
+        });
+
+        const renderMermaidBlocks = async () => {
+            mermaid.initialize(getMermaidConfig());
+
+            for (const [index, block] of mermaidBlocks.entries()) {
+                const suffix = crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+                const id = `mermaid-${index}-${suffix}`;
+                const source = block.dataset.mermaidSource || block.textContent.trim();
+                block.dataset.mermaidSource = source;
+                try {
+                    const { svg, bindFunctions } = await mermaid.render(id, source);
+                    block.innerHTML = svg;
+                    block.dataset.processed = "true";
+                    bindFunctions?.(block);
+                } catch (error) {
+                    block.dataset.processed = "error";
+                    console.error("Mermaid render failed:", error);
+                }
+            }
+        };
+
+        await renderMermaidBlocks();
+
+        document.getElementById("theme-toggle")?.addEventListener("click", () => {
+            window.setTimeout(renderMermaidBlocks, 0);
+        });
+
+        const colorSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        const renderAutoTheme = () => {
+            if (document.documentElement.dataset.theme === "auto") {
+                renderMermaidBlocks();
+            }
+        };
+
+        if (colorSchemeQuery.addEventListener) {
+            colorSchemeQuery.addEventListener("change", renderAutoTheme);
+        } else {
+            colorSchemeQuery.addListener(renderAutoTheme);
+        }
+    }
+</script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="copy";function s(){t.innerHTML="copied!",setTimeout(()=>{t.innerHTML="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>

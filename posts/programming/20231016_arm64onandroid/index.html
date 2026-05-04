@@ -1,0 +1,226 @@
+<!doctype html><html lang=en dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Using Arm64 Assembly on Android | BlueHour</title><meta name=keywords content="Cpp,Android"><meta name=description content='AndroidAsm
+First, create an Android Studio JNI project. By default, the project will generate a C++ file that calls a native function from the Java side to display a string.
+The function generated on the Cpp side uses static binding, so the function name is extremely long and not very pleasant to look at. Let&rsquo;s change it to dynamic binding first. Start by renaming that verbose function.
+JNIEXPORT jstring JNICALL StringFromJNI(JNIEnv *env, jclass clazz)
+{
+    std::string hello { "Hello World From JNI" };
+    return env->NewStringUTF(hello.c_str());
+}
+Next, implement dynamic binding. Add a function called JniOnLoad to the Cpp file, and load the native function from the Java side inside this function.'><meta name=author content="BlueHour"><link rel=canonical href=https://keqing996.github.io/posts/programming/20231016_arm64onandroid/><link crossorigin=anonymous href=/assets/css/stylesheet.3293319b9354386226320ef603fe1ae50e8fbbab16c87f770dcf0fbdd4d83ff2.css integrity="sha256-MpMxm5NUOGImMg72A/4a5Q6Pu6sWyH93Dc8PvdTYP/I=" rel="preload stylesheet" as=style><link rel=icon href=https://keqing996.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://keqing996.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://keqing996.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://keqing996.github.io/apple-touch-icon.png><link rel=mask-icon href=https://keqing996.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://keqing996.github.io/posts/programming/20231016_arm64onandroid/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css integrity=sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+ crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js integrity=sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js integrity=sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk crossorigin=anonymous></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\[",right:"\\]",display:!0},{left:"\\(",right:"\\)",display:!1}],throwOnError:!1})})</script><style>.mermaid{display:block;margin:1.5rem 0;overflow-x:auto;padding:1.25rem;background:color-mix(in srgb,var(--code-bg) 72%,var(--theme));border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 14px 32px rgba(15,23,42,8%);text-align:center}[data-theme=dark] .mermaid{background:color-mix(in srgb,var(--entry) 76%,var(--theme));border-color:color-mix(in srgb,var(--border) 70%,var(--secondary));box-shadow:none}.mermaid svg{display:block;height:auto;margin:0 auto;max-width:100%}</style><meta property="og:url" content="https://keqing996.github.io/posts/programming/20231016_arm64onandroid/"><meta property="og:site_name" content="BlueHour"><meta property="og:title" content="Using Arm64 Assembly on Android"><meta property="og:description" content='AndroidAsm
+First, create an Android Studio JNI project. By default, the project will generate a C++ file that calls a native function from the Java side to display a string.
+The function generated on the Cpp side uses static binding, so the function name is extremely long and not very pleasant to look at. Let’s change it to dynamic binding first. Start by renaming that verbose function.
+JNIEXPORT jstring JNICALL StringFromJNI(JNIEnv *env, jclass clazz) { std::string hello { "Hello World From JNI" }; return env->NewStringUTF(hello.c_str()); } Next, implement dynamic binding. Add a function called JniOnLoad to the Cpp file, and load the native function from the Java side inside this function.'><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-10-16T00:00:00+00:00"><meta property="article:modified_time" content="2023-10-16T00:00:00+00:00"><meta property="article:tag" content="Cpp"><meta property="article:tag" content="Android"><meta name=twitter:card content="summary"><meta name=twitter:title content="Using Arm64 Assembly on Android"><meta name=twitter:description content='AndroidAsm
+First, create an Android Studio JNI project. By default, the project will generate a C++ file that calls a native function from the Java side to display a string.
+The function generated on the Cpp side uses static binding, so the function name is extremely long and not very pleasant to look at. Let’s change it to dynamic binding first. Start by renaming that verbose function.
+JNIEXPORT jstring JNICALL StringFromJNI(JNIEnv *env, jclass clazz) { std::string hello { "Hello World From JNI" }; return env->NewStringUTF(hello.c_str()); } Next, implement dynamic binding. Add a function called JniOnLoad to the Cpp file, and load the native function from the Java side inside this function.'><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://keqing996.github.io/posts/"},{"@type":"ListItem","position":2,"name":"Using Arm64 Assembly on Android","item":"https://keqing996.github.io/posts/programming/20231016_arm64onandroid/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Using Arm64 Assembly on Android","name":"Using Arm64 Assembly on Android","description":"AndroidAsm\nFirst, create an Android Studio JNI project. By default, the project will generate a C++ file that calls a native function from the Java side to display a string.\nThe function generated on the Cpp side uses static binding, so the function name is extremely long and not very pleasant to look at. Let\u0026rsquo;s change it to dynamic binding first. Start by renaming that verbose function.\nJNIEXPORT jstring JNICALL StringFromJNI(JNIEnv *env, jclass clazz) { std::string hello { \u0026#34;Hello World From JNI\u0026#34; }; return env-\u0026gt;NewStringUTF(hello.c_str()); } Next, implement dynamic binding. Add a function called JniOnLoad to the Cpp file, and load the native function from the Java side inside this function.\n","keywords":["Cpp","Android"],"articleBody":"AndroidAsm\nFirst, create an Android Studio JNI project. By default, the project will generate a C++ file that calls a native function from the Java side to display a string.\nThe function generated on the Cpp side uses static binding, so the function name is extremely long and not very pleasant to look at. Let’s change it to dynamic binding first. Start by renaming that verbose function.\nJNIEXPORT jstring JNICALL StringFromJNI(JNIEnv *env, jclass clazz) { std::string hello { \"Hello World From JNI\" }; return env-\u003eNewStringUTF(hello.c_str()); } Next, implement dynamic binding. Add a function called JniOnLoad to the Cpp file, and load the native function from the Java side inside this function.\njint JNI_OnLoad(JavaVM* vm, void* reserved) { JNIEnv * env; vm-\u003eGetEnv((void**)\u0026env,JNI_VERSION_1_6); JNINativeMethod methods[] ={ { \"StringFromJNI\", \"()Ljava/lang/String;\",(void*)StringFromJNI }, }; env-\u003eRegisterNatives(env-\u003eFindClass(\"com/noemie/androidasm/MainActivity\"),methods,1); return JNI_VERSION_1_6; } Next, we will implement two ARM64 assembly functions: one returns a number, and the other returns a string. In StringFromJNI, we combine the return values of the two assembly functions, return the result to Java, and display it.\nFirst, implement an assembly function that directly returns a number. Create get_number.s under the cpp directory.\n.text .global GetNumber GetNumber: mov x0, #10 ret The implementation is very simple. It declares a function called GetNumber, puts the constant 10 into register x0, and then returns. In Arm assembly, x0 holds the return value, similar to rax on x64. ret means return. On Arm32 this would be the bx lr branch instruction, while on Arm64 it is ret, so this is one detail to watch out for.\nNext, implement another assembly function that returns a string. Create get_hello_str.s under the cpp directory.\n.global GetHelloStr .section .rodata str: .asciz \"hello\" .text GetHelloStr: adrp x0, str add x0, x0, :lo12:str ret First, we declare the string hello in the rodata section. Then, in the text section, we declare a function called GetHelloStr. The assembly instruction adrp together with the following add is a very common pattern in arm64: it gets a specific address through an offset. I will not go into the exact mechanism here, since this post is mainly about getting the workflow running. In the end, x0 contains a pointer to the string above, and then the function returns.\nNow go back to the C++ side. First declare these two assembly functions with extern, then call them.\nextern \"C\" int GetNumber(void); extern \"C\" char* GetHelloStr(void); JNIEXPORT jstring JNICALL StringFromJNI(JNIEnv *env, jclass clazz) { std::string hello = std::string { GetHelloStr() } + std::to_string(GetNumber()); return env-\u003eNewStringUTF(hello.c_str()); } At this point the code is ready. Next, add the two assembly source files to Cmake.\n# Enable assembly. enable_language(ASM) # Add the two assembly files to the source list. add_library(${CMAKE_PROJECT_NAME} SHARED get_number.s get_hello_str.s native_lib.cpp) Finally, configure the NDK in Gradle. Since we wrote assembly directly, and this assembly uses Armv8 64-bit instructions, it will not compile for Armv7. So we need to configure this library to build only the Armv8 version.\nbuildTypes { defaultConfig { ndk { abiFilters += \"arm64-v8a\" } } } Now the project should build, and you should be able to see the following on your phone.\n","wordCount":"516","inLanguage":"en","datePublished":"2023-10-16T00:00:00Z","dateModified":"2023-10-16T00:00:00Z","author":{"@type":"Person","name":"BlueHour"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://keqing996.github.io/posts/programming/20231016_arm64onandroid/"},"publisher":{"@type":"Organization","name":"BlueHour","logo":{"@type":"ImageObject","url":"https://keqing996.github.io/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://keqing996.github.io/ accesskey=h title="BlueHour (Alt + H)">BlueHour</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://keqing996.github.io/posts/ title=Posts><span>Posts</span></a></li><li><a href=https://keqing996.github.io/categories/ title=Categories><span>Categories</span></a></li><li><a href=https://keqing996.github.io/tags/ title=Tags><span>Tags</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=https://keqing996.github.io/>Home</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=https://keqing996.github.io/posts/>Posts</a></nav><h1 class="post-title entry-hint-parent">Using Arm64 Assembly on Android</h1><div class=post-meta><span title='2023-10-16 00:00:00 +0000 UTC'>2023-10-16</span>&nbsp;·&nbsp;<span>3 min</span>&nbsp;·&nbsp;<span>516 words</span>&nbsp;·&nbsp;<span>BlueHour</span></div></header><div class="post-content md-content"><p><a href=https://github.com/keqing996/AndroidCppWithAsm>AndroidAsm</a></p><p>First, create an Android Studio JNI project. By default, the project will generate a C++ file that calls a native function from the Java side to display a string.</p><p>The function generated on the Cpp side uses static binding, so the function name is extremely long and not very pleasant to look at. Let&rsquo;s change it to dynamic binding first. Start by renaming that verbose function.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-C++ data-lang=C++><span class=line><span class=cl><span class=n>JNIEXPORT</span> <span class=n>jstring</span> <span class=n>JNICALL</span> <span class=nf>StringFromJNI</span><span class=p>(</span><span class=n>JNIEnv</span> <span class=o>*</span><span class=n>env</span><span class=p>,</span> <span class=n>jclass</span> <span class=n>clazz</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>std</span><span class=o>::</span><span class=n>string</span> <span class=n>hello</span> <span class=p>{</span> <span class=s>&#34;Hello World From JNI&#34;</span> <span class=p>};</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>env</span><span class=o>-&gt;</span><span class=n>NewStringUTF</span><span class=p>(</span><span class=n>hello</span><span class=p>.</span><span class=n>c_str</span><span class=p>());</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>Next, implement dynamic binding. Add a function called JniOnLoad to the Cpp file, and load the native function from the Java side inside this function.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-C++ data-lang=C++><span class=line><span class=cl><span class=n>jint</span> <span class=nf>JNI_OnLoad</span><span class=p>(</span><span class=n>JavaVM</span><span class=o>*</span> <span class=n>vm</span><span class=p>,</span> <span class=kt>void</span><span class=o>*</span> <span class=n>reserved</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>JNIEnv</span> <span class=o>*</span> <span class=n>env</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>vm</span><span class=o>-&gt;</span><span class=n>GetEnv</span><span class=p>((</span><span class=kt>void</span><span class=o>**</span><span class=p>)</span><span class=o>&amp;</span><span class=n>env</span><span class=p>,</span><span class=n>JNI_VERSION_1_6</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>JNINativeMethod</span> <span class=n>methods</span><span class=p>[]</span> <span class=o>=</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span> <span class=s>&#34;StringFromJNI&#34;</span><span class=p>,</span> <span class=s>&#34;()Ljava/lang/String;&#34;</span><span class=p>,(</span><span class=kt>void</span><span class=o>*</span><span class=p>)</span><span class=n>StringFromJNI</span> <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>env</span><span class=o>-&gt;</span><span class=n>RegisterNatives</span><span class=p>(</span><span class=n>env</span><span class=o>-&gt;</span><span class=n>FindClass</span><span class=p>(</span><span class=s>&#34;com/noemie/androidasm/MainActivity&#34;</span><span class=p>),</span><span class=n>methods</span><span class=p>,</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>JNI_VERSION_1_6</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>Next, we will implement two ARM64 assembly functions: one returns a number, and the other returns a string. In StringFromJNI, we combine the return values of the two assembly functions, return the result to Java, and display it.</p><p>First, implement an assembly function that directly returns a number. Create get_number.s under the cpp directory.</p><pre tabindex=0><code class=language-assembly data-lang=assembly>.text
+.global GetNumber
+GetNumber:
+    mov x0, #10
+    ret
+</code></pre><p>The implementation is very simple. It declares a function called GetNumber, puts the constant 10 into register x0, and then returns. In Arm assembly, x0 holds the return value, similar to rax on x64. ret means return. On Arm32 this would be the bx lr branch instruction, while on Arm64 it is ret, so this is one detail to watch out for.</p><p>Next, implement another assembly function that returns a string. Create get_hello_str.s under the cpp directory.</p><pre tabindex=0><code class=language-assembly data-lang=assembly>.global GetHelloStr
+.section .rodata
+str:
+    .asciz &#34;hello&#34;
+
+.text
+GetHelloStr:
+    adrp x0, str
+    add x0, x0, :lo12:str
+    ret
+</code></pre><p>First, we declare the string hello in the rodata section. Then, in the text section, we declare a function called GetHelloStr. The assembly instruction adrp together with the following add is a very common pattern in arm64: it gets a specific address through an offset. I will not go into the exact mechanism here, since this post is mainly about getting the workflow running. In the end, x0 contains a pointer to the string above, and then the function returns.</p><p>Now go back to the C++ side. First declare these two assembly functions with extern, then call them.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-C++ data-lang=C++><span class=line><span class=cl><span class=k>extern</span> <span class=s>&#34;C&#34;</span> <span class=kt>int</span> <span class=n>GetNumber</span><span class=p>(</span><span class=kt>void</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=k>extern</span> <span class=s>&#34;C&#34;</span> <span class=kt>char</span><span class=o>*</span> <span class=n>GetHelloStr</span><span class=p>(</span><span class=kt>void</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>JNIEXPORT</span> <span class=n>jstring</span> <span class=n>JNICALL</span> <span class=nf>StringFromJNI</span><span class=p>(</span><span class=n>JNIEnv</span> <span class=o>*</span><span class=n>env</span><span class=p>,</span> <span class=n>jclass</span> <span class=n>clazz</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>std</span><span class=o>::</span><span class=n>string</span> <span class=n>hello</span> <span class=o>=</span> <span class=n>std</span><span class=o>::</span><span class=n>string</span> <span class=p>{</span> <span class=n>GetHelloStr</span><span class=p>()</span> <span class=p>}</span> <span class=o>+</span> <span class=n>std</span><span class=o>::</span><span class=n>to_string</span><span class=p>(</span><span class=n>GetNumber</span><span class=p>());</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>env</span><span class=o>-&gt;</span><span class=n>NewStringUTF</span><span class=p>(</span><span class=n>hello</span><span class=p>.</span><span class=n>c_str</span><span class=p>());</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>At this point the code is ready. Next, add the two assembly source files to Cmake.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmake data-lang=cmake><span class=line><span class=cl><span class=c># Enable assembly.
+</span></span></span><span class=line><span class=cl><span class=nb>enable_language</span><span class=p>(</span><span class=s>ASM</span><span class=p>)</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=c># Add the two assembly files to the source list.
+</span></span></span><span class=line><span class=cl><span class=nb>add_library</span><span class=p>(</span><span class=o>${</span><span class=nv>CMAKE_PROJECT_NAME</span><span class=o>}</span> <span class=s>SHARED</span>
+</span></span><span class=line><span class=cl>        <span class=s>get_number.s</span>
+</span></span><span class=line><span class=cl>        <span class=s>get_hello_str.s</span>
+</span></span><span class=line><span class=cl>        <span class=s>native_lib.cpp</span><span class=p>)</span><span class=err>
+</span></span></span></code></pre></div><p>Finally, configure the NDK in Gradle. Since we wrote assembly directly, and this assembly uses Armv8 64-bit instructions, it will not compile for Armv7. So we need to configure this library to build only the Armv8 version.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-kotlin data-lang=kotlin><span class=line><span class=cl><span class=n>buildTypes</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>defaultConfig</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>ndk</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>abiFilters</span> <span class=o>+=</span> <span class=s2>&#34;arm64-v8a&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>Now the project should build, and you should be able to see the following on your phone.</p><p><img loading=lazy src=/posts/programming/20231016_arm64onandroid/assets/Screenshot.jpg></p></div><footer class=post-footer><ul class=post-tags><li><a href=https://keqing996.github.io/tags/cpp/>Cpp</a></li><li><a href=https://keqing996.github.io/tags/android/>Android</a></li></ul><nav class=paginav><a class=prev href=https://keqing996.github.io/posts/programming/20231217_crosscompileandroidcpp/><span class=title>« Prev</span>
+<span>Cross-Compiling C++ for Android Without Android Studio</span>
+</a><a class=next href=https://keqing996.github.io/posts/programming/20230421_lockfree/><span class=title>Next »</span>
+<span>Lock-Free Programming</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://keqing996.github.io/>BlueHour</a></span> ·
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
+</a><script type=module>
+    const mermaidBlocks = document.querySelectorAll(".mermaid");
+    if (mermaidBlocks.length) {
+        const { default: mermaid } = await import("https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs");
+
+        const getMermaidMode = () => {
+            const theme = document.documentElement.dataset.theme;
+            if (theme === "dark") {
+                return "dark";
+            }
+            if (theme === "light") {
+                return "light";
+            }
+            return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        };
+
+        const mermaidThemes = {
+            light: {
+                background: "transparent",
+                primaryColor: "#eef6ff",
+                primaryTextColor: "#102033",
+                primaryBorderColor: "#3b82f6",
+                secondaryColor: "#eefcf6",
+                secondaryTextColor: "#102033",
+                secondaryBorderColor: "#10b981",
+                tertiaryColor: "#fff7ed",
+                tertiaryTextColor: "#102033",
+                tertiaryBorderColor: "#f59e0b",
+                mainBkg: "#f8fbff",
+                secondBkg: "#f3fbf7",
+                lineColor: "#64748b",
+                textColor: "#102033",
+                clusterBkg: "#f8fafc",
+                clusterBorder: "#cbd5e1",
+                edgeLabelBackground: "#ffffff",
+                fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                actorBkg: "#f8fbff",
+                actorBorder: "#3b82f6",
+                actorTextColor: "#102033",
+                actorLineColor: "#94a3b8",
+                signalColor: "#475569",
+                signalTextColor: "#102033",
+                noteBkgColor: "#fff7ed",
+                noteBorderColor: "#f59e0b",
+                noteTextColor: "#102033",
+                activationBkgColor: "#e0f2fe",
+                activationBorderColor: "#0284c7",
+                sequenceNumberColor: "#ffffff"
+            },
+            dark: {
+                background: "transparent",
+                primaryColor: "#172b45",
+                primaryTextColor: "#e5edf8",
+                primaryBorderColor: "#60a5fa",
+                secondaryColor: "#123527",
+                secondaryTextColor: "#e5edf8",
+                secondaryBorderColor: "#34d399",
+                tertiaryColor: "#3b2a18",
+                tertiaryTextColor: "#f8ead4",
+                tertiaryBorderColor: "#f59e0b",
+                mainBkg: "#111827",
+                secondBkg: "#10251d",
+                lineColor: "#94a3b8",
+                textColor: "#e5edf8",
+                clusterBkg: "#202226",
+                clusterBorder: "#475569",
+                edgeLabelBackground: "#1f2937",
+                fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                actorBkg: "#172b45",
+                actorBorder: "#60a5fa",
+                actorTextColor: "#e5edf8",
+                actorLineColor: "#64748b",
+                signalColor: "#cbd5e1",
+                signalTextColor: "#e5edf8",
+                noteBkgColor: "#3b2a18",
+                noteBorderColor: "#f59e0b",
+                noteTextColor: "#f8ead4",
+                activationBkgColor: "#0f3a54",
+                activationBorderColor: "#38bdf8",
+                sequenceNumberColor: "#111827"
+            }
+        };
+
+        const getMermaidConfig = () => ({
+            startOnLoad: false,
+            theme: "base",
+            look: "classic",
+            securityLevel: "strict",
+            themeVariables: mermaidThemes[getMermaidMode()],
+            flowchart: {
+                curve: "basis",
+                htmlLabels: true,
+                nodeSpacing: 44,
+                padding: 18,
+                rankSpacing: 58
+            },
+            sequence: {
+                actorMargin: 72,
+                boxMargin: 8,
+                boxTextMargin: 6,
+                messageMargin: 44,
+                mirrorActors: false,
+                noteMargin: 14
+            }
+        });
+
+        const renderMermaidBlocks = async () => {
+            mermaid.initialize(getMermaidConfig());
+
+            for (const [index, block] of mermaidBlocks.entries()) {
+                const suffix = crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+                const id = `mermaid-${index}-${suffix}`;
+                const source = block.dataset.mermaidSource || block.textContent.trim();
+                block.dataset.mermaidSource = source;
+                try {
+                    const { svg, bindFunctions } = await mermaid.render(id, source);
+                    block.innerHTML = svg;
+                    block.dataset.processed = "true";
+                    bindFunctions?.(block);
+                } catch (error) {
+                    block.dataset.processed = "error";
+                    console.error("Mermaid render failed:", error);
+                }
+            }
+        };
+
+        await renderMermaidBlocks();
+
+        document.getElementById("theme-toggle")?.addEventListener("click", () => {
+            window.setTimeout(renderMermaidBlocks, 0);
+        });
+
+        const colorSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        const renderAutoTheme = () => {
+            if (document.documentElement.dataset.theme === "auto") {
+                renderMermaidBlocks();
+            }
+        };
+
+        if (colorSchemeQuery.addEventListener) {
+            colorSchemeQuery.addEventListener("change", renderAutoTheme);
+        } else {
+            colorSchemeQuery.addListener(renderAutoTheme);
+        }
+    }
+</script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="copy";function s(){t.innerHTML="copied!",setTimeout(()=>{t.innerHTML="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>

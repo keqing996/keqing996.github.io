@@ -1,0 +1,237 @@
+<!doctype html><html lang=en dir=auto data-theme=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Cross-Compiling C++ for Android Without Android Studio | BlueHour</title><meta name=keywords content="Cpp,Android"><meta name=description content="AndroidCppCrossCompile
+Android Studio has quite a few bugs, and the C++ development experience is not exactly great. A lot of the time, when we need to do JNI development or pure C++ development, we do not really want to do it inside Android Studio. So we need an environment for cross-compiling C++ programs for Android without relying on Android Studio.
+Next, I will use CMake to build the whole workflow. First, the preparation: you must download the NDK, because we need to use the NDK toolchain. The version I use here is r23c."><meta name=author content="BlueHour"><link rel=canonical href=https://keqing996.github.io/posts/programming/20231217_crosscompileandroidcpp/><link crossorigin=anonymous href=/assets/css/stylesheet.3293319b9354386226320ef603fe1ae50e8fbbab16c87f770dcf0fbdd4d83ff2.css integrity="sha256-MpMxm5NUOGImMg72A/4a5Q6Pu6sWyH93Dc8PvdTYP/I=" rel="preload stylesheet" as=style><link rel=icon href=https://keqing996.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://keqing996.github.io/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://keqing996.github.io/favicon-32x32.png><link rel=apple-touch-icon href=https://keqing996.github.io/apple-touch-icon.png><link rel=mask-icon href=https://keqing996.github.io/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://keqing996.github.io/posts/programming/20231217_crosscompileandroidcpp/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51);color-scheme:dark}.list{background:var(--theme)}.toc{background:var(--entry)}}</style></noscript><script>localStorage.getItem("pref-theme")==="dark"?document.querySelector("html").dataset.theme="dark":localStorage.getItem("pref-theme")==="light"?document.querySelector("html").dataset.theme="light":window.matchMedia("(prefers-color-scheme: dark)").matches?document.querySelector("html").dataset.theme="dark":document.querySelector("html").dataset.theme="light"</script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css integrity=sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+ crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js integrity=sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js integrity=sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk crossorigin=anonymous></script><script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\[",right:"\\]",display:!0},{left:"\\(",right:"\\)",display:!1}],throwOnError:!1})})</script><style>.mermaid{display:block;margin:1.5rem 0;overflow-x:auto;padding:1.25rem;background:color-mix(in srgb,var(--code-bg) 72%,var(--theme));border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 14px 32px rgba(15,23,42,8%);text-align:center}[data-theme=dark] .mermaid{background:color-mix(in srgb,var(--entry) 76%,var(--theme));border-color:color-mix(in srgb,var(--border) 70%,var(--secondary));box-shadow:none}.mermaid svg{display:block;height:auto;margin:0 auto;max-width:100%}</style><meta property="og:url" content="https://keqing996.github.io/posts/programming/20231217_crosscompileandroidcpp/"><meta property="og:site_name" content="BlueHour"><meta property="og:title" content="Cross-Compiling C++ for Android Without Android Studio"><meta property="og:description" content="AndroidCppCrossCompile
+Android Studio has quite a few bugs, and the C++ development experience is not exactly great. A lot of the time, when we need to do JNI development or pure C++ development, we do not really want to do it inside Android Studio. So we need an environment for cross-compiling C++ programs for Android without relying on Android Studio.
+Next, I will use CMake to build the whole workflow. First, the preparation: you must download the NDK, because we need to use the NDK toolchain. The version I use here is r23c."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-12-17T00:00:00+00:00"><meta property="article:modified_time" content="2023-12-17T00:00:00+00:00"><meta property="article:tag" content="Cpp"><meta property="article:tag" content="Android"><meta name=twitter:card content="summary"><meta name=twitter:title content="Cross-Compiling C++ for Android Without Android Studio"><meta name=twitter:description content="AndroidCppCrossCompile
+Android Studio has quite a few bugs, and the C++ development experience is not exactly great. A lot of the time, when we need to do JNI development or pure C++ development, we do not really want to do it inside Android Studio. So we need an environment for cross-compiling C++ programs for Android without relying on Android Studio.
+Next, I will use CMake to build the whole workflow. First, the preparation: you must download the NDK, because we need to use the NDK toolchain. The version I use here is r23c."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://keqing996.github.io/posts/"},{"@type":"ListItem","position":2,"name":"Cross-Compiling C++ for Android Without Android Studio","item":"https://keqing996.github.io/posts/programming/20231217_crosscompileandroidcpp/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Cross-Compiling C++ for Android Without Android Studio","name":"Cross-Compiling C\u002b\u002b for Android Without Android Studio","description":"AndroidCppCrossCompile\nAndroid Studio has quite a few bugs, and the C++ development experience is not exactly great. A lot of the time, when we need to do JNI development or pure C++ development, we do not really want to do it inside Android Studio. So we need an environment for cross-compiling C++ programs for Android without relying on Android Studio.\nNext, I will use CMake to build the whole workflow. First, the preparation: you must download the NDK, because we need to use the NDK toolchain. The version I use here is r23c.\n","keywords":["Cpp","Android"],"articleBody":"AndroidCppCrossCompile\nAndroid Studio has quite a few bugs, and the C++ development experience is not exactly great. A lot of the time, when we need to do JNI development or pure C++ development, we do not really want to do it inside Android Studio. So we need an environment for cross-compiling C++ programs for Android without relying on Android Studio.\nNext, I will use CMake to build the whole workflow. First, the preparation: you must download the NDK, because we need to use the NDK toolchain. The version I use here is r23c.\nThe goal is to compile a native Linux program, run it on an Android phone, and print a hello world message in the log. So the C++ part is very simple.\n#include constexpr const char* LogTag = \"HelloWorld\"; void LogCatError(const char* tag, const char* message) { __android_log_print(ANDROID_LOG_ERROR, tag, \"%s\", message); } int main() { LogCatError(LogTag, \"Test Test Hello\"); return 0; } From here, we will do it in two steps: first compile a program for Android, then take a closer look at how to configure some Android-specific settings, such as the API level.\nBuild the Executable Generally speaking, when compiling with CMake, you need to be clear about a few key questions:\nWhat is the generator, meaning which tool is used to build the project? As everyone knows, CMake is really a build tool that generates build files. This affects two parameters: -G on the CMake command line, and CMake’s built-in variable CMAKE_MAKE_PROGRAM. What is the compiler? This affects two CMake built-in variables, CMAKE_C_COMPILER and CMAKE_CXX_COMPILER. Where are the header files? Where are the linked libraries? For an Android build, we can answer these questions one by one.\nWhat is the generator? Android uses make.exe to build, so the CMake -G parameter should use Unix Makefiles. The make.exe used by Android is included in the downloaded NDK. It is best to use this make.exe to avoid strange issues. The path is ndkpath/prebuilt/windows-x86_64/bin/make.exe. For example, my NDK is installed somewhere under the D drive, so my make.exe is at D:/Programmes/Android/ndk/android-ndk-r23c/prebuilt/windows-x86_64/bin/make.exe.\nWhat is the compiler? Android uses clang as its compiler, and it is also included in the downloaded NDK, so just use that clang. The C compiler is ndkpath/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe, and the C++ compiler is ndkpath/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe.\nWhen compiling Android code with CMake, you do not need to explicitly specify the compiler path. Instead, specify CMake’s toolchain file, which is CMAKE_TOOLCHAIN_FILE. For Android, this file is at ndkpath/build/cmake/android.toolchain.cmake. This toolchain file will take care of finding the compiler location by itself.\nHowever, make.exe still needs to be specified explicitly, because the toolchain does not set the location of make.\nWhere are the headers? They are in ndkpath/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/. Unlike the generator and compiler above, which are usually passed through the command line or configured with CMakePresets.json, headers need to be written in CMakeLists.txt. Usually we do not use an absolute path here, because everyone on a team has their own NDK path. Instead, we can use a variable defined by the toolchain, CMAKE_ANDROID_NDK, which points to the NDK path, and then append the include path after it.\nWhere are the libraries? They are in ndkpath/android-ndk-r23c/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/.\nOnce the preparation above is done, we can start writing CMakeLists and CMakePresets. First, here is CMakePresets.json.\n{ \"version\": 5, \"configurePresets\": [ { \"name\": \"Android\", \"displayName\": \"Android\", \"description\": \"Build android\", \"generator\": \"Unix Makefiles\", \"binaryDir\": \"${sourceDir}/build/${presetName}\", \"cacheVariables\": { \"CMAKE_TOOLCHAIN_FILE\": \"D:/Programmes/Android/ndk/android-ndk-r23c/build/cmake/android.toolchain.cmake\", \"CMAKE_MAKE_PROGRAM\": \"D:/Programmes/Android/ndk/android-ndk-r23c/prebuilt/windows-x86_64/bin/make.exe\", \"CMAKE_EXPORT_COMPILE_COMMANDS\": \"1\" } } ], \"buildPresets\": [ { \"name\": \"Android\", \"configurePreset\": \"Android\" } ] } This file solves the first two problems: generator and compiler. The generator is specified through CMAKE_MAKE_PROGRAM. The compiler is handled indirectly by specifying the toolchain file through CMAKE_TOOLCHAIN_FILE. Finally, I also added CMAKE_EXPORT_COMPILE_COMMANDS to generate the compile command file compile_commands.json. If you use VS Code, clangd needs it for code completion.\nNext is CMakeLists.txt.\ncmake_minimum_required(VERSION 3.26) project(AndroidCpp) add_executable(hello_world src/Main.cpp) target_include_directories(hello_world PRIVATE \"${CMAKE_ANDROID_NDK}/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/\") target_link_libraries(hello_world PRIVATE liblog.so ) The variable CMAKE_ANDROID_NDK is defined in the toolchain and points to the NDK path.\nAfter that, just run configure and build, and you can compile a hello_world executable. Put it on Android and run it with adb shell, and you should be able to see hello world successfully.\nAdjust Android Parameters CPP on Android is not quite this simple. There are still some Android-specific things to consider. For example, which instruction set should be used? Armv7 or armv8? What should minSdk be, and how do we specify it?\nIf you look at the compile_commands.json generated by CMake above, you can notice a few details.\nThe executable generated here is actually for armv7, and the Android SDK is 16, which is very ancient. In practice, Android specifies these details by passing parameters to the toolchain. The parameters you can pass are listed at the beginning of the toolchain file.\nFor exactly how to pass them, you can refer to this page: https://developer.android.com/ndk/guides/cmake#variables.\nFor example, if we want the compiled instruction set to be armv8 and minSdk to be 31, we only need to add a few parameters in CMakePresets.\n{ \"version\": 5, \"configurePresets\": [ { \"name\": \"Android\", \"displayName\": \"Android\", \"description\": \"Build android\", \"generator\": \"Unix Makefiles\", \"binaryDir\": \"${sourceDir}/build/${presetName}\", \"cacheVariables\": { \"CMAKE_TOOLCHAIN_FILE\": \"D:/Programmes/Android/ndk/android-ndk-r23c/build/cmake/android.toolchain.cmake\", \"CMAKE_MAKE_PROGRAM\": \"D:/Programmes/Android/ndk/android-ndk-r23c/prebuilt/windows-x86_64/bin/make.exe\", \"ANDROID_PLATFORM\": \"31\", \"ANDROID_ABI\": \"arm64-v8a\", \"CMAKE_EXPORT_COMPILE_COMMANDS\": \"1\" } } ], \"buildPresets\": [ { \"name\": \"Android\", \"configurePreset\": \"Android\" } ] } Then you can see that the target in compile_commands.json has changed.\n","wordCount":"889","inLanguage":"en","datePublished":"2023-12-17T00:00:00Z","dateModified":"2023-12-17T00:00:00Z","author":{"@type":"Person","name":"BlueHour"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://keqing996.github.io/posts/programming/20231217_crosscompileandroidcpp/"},"publisher":{"@type":"Organization","name":"BlueHour","logo":{"@type":"ImageObject","url":"https://keqing996.github.io/favicon.ico"}}}</script></head><body id=top><header class=header><nav class=header-nav><div class=logo><a href=https://keqing996.github.io/ accesskey=h title="BlueHour (Alt + H)">BlueHour</a><div class=logo-switches><button id=theme-toggle class=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu class=menu><li><a href=https://keqing996.github.io/posts/ title=Posts><span>Posts</span></a></li><li><a href=https://keqing996.github.io/categories/ title=Categories><span>Categories</span></a></li><li><a href=https://keqing996.github.io/tags/ title=Tags><span>Tags</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><nav class=breadcrumbs role=navigation aria-label=Breadcrumb><a href=https://keqing996.github.io/>Home</a>
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"/></svg>
+<a href=https://keqing996.github.io/posts/>Posts</a></nav><h1 class="post-title entry-hint-parent">Cross-Compiling C++ for Android Without Android Studio</h1><div class=post-meta><span title='2023-12-17 00:00:00 +0000 UTC'>2023-12-17</span>&nbsp;·&nbsp;<span>5 min</span>&nbsp;·&nbsp;<span>889 words</span>&nbsp;·&nbsp;<span>BlueHour</span></div></header><details class=toc><summary accesskey=c title="(Alt + C)"><span class=title>Table of Contents</span></summary><div class=inner><nav id=TableOfContents><ul><li><ul><li><a href=#build-the-executable>Build the Executable</a></li><li><a href=#adjust-android-parameters>Adjust Android Parameters</a></li></ul></li></ul></nav></div></details><div class="post-content md-content"><p><a href=https://github.com/keqing996/AndroidCppCrossCompile>AndroidCppCrossCompile</a></p><p>Android Studio has quite a few bugs, and the C++ development experience is not exactly great. A lot of the time, when we need to do JNI development or pure C++ development, we do not really want to do it inside Android Studio. So we need an environment for cross-compiling C++ programs for Android without relying on Android Studio.</p><p>Next, I will use CMake to build the whole workflow. First, the preparation: you must download the NDK, because we need to use the NDK toolchain. The version I use here is r23c.</p><p>The goal is to compile a native Linux program, run it on an Android phone, and print a hello world message in the log. So the C++ part is very simple.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-C++ data-lang=C++><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;android/log.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>constexpr</span> <span class=k>const</span> <span class=kt>char</span><span class=o>*</span> <span class=n>LogTag</span> <span class=o>=</span> <span class=s>&#34;HelloWorld&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>LogCatError</span><span class=p>(</span><span class=k>const</span> <span class=kt>char</span><span class=o>*</span> <span class=n>tag</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span><span class=o>*</span> <span class=n>message</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=n>__android_log_print</span><span class=p>(</span><span class=n>ANDROID_LOG_ERROR</span><span class=p>,</span> <span class=n>tag</span><span class=p>,</span> <span class=s>&#34;%s&#34;</span><span class=p>,</span> <span class=n>message</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=nf>main</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>LogCatError</span><span class=p>(</span><span class=n>LogTag</span><span class=p>,</span> <span class=s>&#34;Test Test Hello&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>From here, we will do it in two steps: first compile a program for Android, then take a closer look at how to configure some Android-specific settings, such as the API level.</p><h2 id=build-the-executable>Build the Executable<a hidden class=anchor aria-hidden=true href=#build-the-executable>#</a></h2><p>Generally speaking, when compiling with CMake, you need to be clear about a few key questions:</p><ul><li>What is the generator, meaning which tool is used to build the project? As everyone knows, CMake is really a build tool that generates build files. This affects two parameters: <code>-G</code> on the CMake command line, and CMake&rsquo;s built-in variable <code>CMAKE_MAKE_PROGRAM</code>.</li><li>What is the compiler? This affects two CMake built-in variables, <code>CMAKE_C_COMPILER</code> and <code>CMAKE_CXX_COMPILER</code>.</li><li>Where are the header files?</li><li>Where are the linked libraries?</li></ul><p>For an Android build, we can answer these questions one by one.</p><ul><li>What is the generator?</li></ul><p>Android uses <code>make.exe</code> to build, so the CMake <code>-G</code> parameter should use <code>Unix Makefiles</code>. The <code>make.exe</code> used by Android is included in the downloaded NDK. It is best to use this <code>make.exe</code> to avoid strange issues. The path is <code>ndkpath/prebuilt/windows-x86_64/bin/make.exe</code>. For example, my NDK is installed somewhere under the D drive, so my <code>make.exe</code> is at <code>D:/Programmes/Android/ndk/android-ndk-r23c/prebuilt/windows-x86_64/bin/make.exe</code>.</p><ul><li>What is the compiler?</li></ul><p>Android uses <code>clang</code> as its compiler, and it is also included in the downloaded NDK, so just use that <code>clang</code>. The C compiler is <code>ndkpath/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe</code>, and the C++ compiler is <code>ndkpath/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe</code>.</p><p>When compiling Android code with CMake, you do not need to explicitly specify the compiler path. Instead, specify CMake&rsquo;s toolchain file, which is <code>CMAKE_TOOLCHAIN_FILE</code>. For Android, this file is at <code>ndkpath/build/cmake/android.toolchain.cmake</code>. This toolchain file will take care of finding the compiler location by itself.</p><p>However, <code>make.exe</code> still needs to be specified explicitly, because the toolchain does not set the location of <code>make</code>.</p><ul><li>Where are the headers?</li></ul><p>They are in <code>ndkpath/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/</code>. Unlike the generator and compiler above, which are usually passed through the command line or configured with <code>CMakePresets.json</code>, headers need to be written in <code>CMakeLists.txt</code>. Usually we do not use an absolute path here, because everyone on a team has their own NDK path. Instead, we can use a variable defined by the toolchain, <code>CMAKE_ANDROID_NDK</code>, which points to the NDK path, and then append the include path after it.</p><ul><li>Where are the libraries?</li></ul><p>They are in <code>ndkpath/android-ndk-r23c/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/lib/aarch64-linux-android/</code>.</p><p>Once the preparation above is done, we can start writing <code>CMakeLists</code> and <code>CMakePresets</code>. First, here is <code>CMakePresets.json</code>.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>  
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>5</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;configurePresets&#34;</span><span class=p>:</span> <span class=p>[</span>  
+</span></span><span class=line><span class=cl>        <span class=p>{</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;Android&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;displayName&#34;</span><span class=p>:</span> <span class=s2>&#34;Android&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;Build android&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;generator&#34;</span><span class=p>:</span> <span class=s2>&#34;Unix Makefiles&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;binaryDir&#34;</span><span class=p>:</span> <span class=s2>&#34;${sourceDir}/build/${presetName}&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;cacheVariables&#34;</span><span class=p>:</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>                <span class=nt>&#34;CMAKE_TOOLCHAIN_FILE&#34;</span><span class=p>:</span> <span class=s2>&#34;D:/Programmes/Android/ndk/android-ndk-r23c/build/cmake/android.toolchain.cmake&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>                <span class=nt>&#34;CMAKE_MAKE_PROGRAM&#34;</span><span class=p>:</span> <span class=s2>&#34;D:/Programmes/Android/ndk/android-ndk-r23c/prebuilt/windows-x86_64/bin/make.exe&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>                <span class=nt>&#34;CMAKE_EXPORT_COMPILE_COMMANDS&#34;</span><span class=p>:</span> <span class=s2>&#34;1&#34;</span>  
+</span></span><span class=line><span class=cl>            <span class=p>}</span>  
+</span></span><span class=line><span class=cl>        <span class=p>}</span>  
+</span></span><span class=line><span class=cl>    <span class=p>],</span>  
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;buildPresets&#34;</span><span class=p>:</span> <span class=p>[</span>  
+</span></span><span class=line><span class=cl>        <span class=p>{</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;Android&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;configurePreset&#34;</span><span class=p>:</span> <span class=s2>&#34;Android&#34;</span>  
+</span></span><span class=line><span class=cl>        <span class=p>}</span>  
+</span></span><span class=line><span class=cl>    <span class=p>]</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>This file solves the first two problems: generator and compiler. The generator is specified through <code>CMAKE_MAKE_PROGRAM</code>. The compiler is handled indirectly by specifying the toolchain file through <code>CMAKE_TOOLCHAIN_FILE</code>. Finally, I also added <code>CMAKE_EXPORT_COMPILE_COMMANDS</code> to generate the compile command file <code>compile_commands.json</code>. If you use VS Code, <code>clangd</code> needs it for code completion.</p><p>Next is <code>CMakeLists.txt</code>.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-cmake data-lang=cmake><span class=line><span class=cl><span class=nb>cmake_minimum_required</span><span class=p>(</span><span class=s>VERSION</span> <span class=s>3.26</span><span class=p>)</span>  <span class=err>
+</span></span></span><span class=line><span class=cl>  <span class=err>
+</span></span></span><span class=line><span class=cl><span class=nb>project</span><span class=p>(</span><span class=s>AndroidCpp</span><span class=p>)</span>  <span class=err>
+</span></span></span><span class=line><span class=cl>  <span class=err>
+</span></span></span><span class=line><span class=cl><span class=nb>add_executable</span><span class=p>(</span><span class=s>hello_world</span> <span class=s>src/Main.cpp</span><span class=p>)</span>  <span class=err>
+</span></span></span><span class=line><span class=cl>  <span class=err>
+</span></span></span><span class=line><span class=cl><span class=nb>target_include_directories</span><span class=p>(</span><span class=s>hello_world</span> <span class=s>PRIVATE</span>  
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;${CMAKE_ANDROID_NDK}/toolchains/llvm/prebuilt/windows-x86_64/sysroot/usr/include/&#34;</span><span class=p>)</span>  <span class=err>
+</span></span></span><span class=line><span class=cl>   <span class=err>
+</span></span></span><span class=line><span class=cl><span class=nb>target_link_libraries</span><span class=p>(</span><span class=s>hello_world</span> <span class=s>PRIVATE</span>  
+</span></span><span class=line><span class=cl>        <span class=s>liblog.so</span>  
+</span></span><span class=line><span class=cl><span class=p>)</span><span class=err>
+</span></span></span></code></pre></div><p>The variable <code>CMAKE_ANDROID_NDK</code> is defined in the toolchain and points to the NDK path.</p><p>After that, just run configure and build, and you can compile a <code>hello_world</code> executable. Put it on Android and run it with <code>adb shell</code>, and you should be able to see hello world successfully.</p><p><img loading=lazy src=/posts/programming/20231217_crosscompileandroidcpp/assets/345432454325432.png></p><h2 id=adjust-android-parameters>Adjust Android Parameters<a hidden class=anchor aria-hidden=true href=#adjust-android-parameters>#</a></h2><p>CPP on Android is not quite this simple. There are still some Android-specific things to consider. For example, which instruction set should be used? Armv7 or armv8? What should <code>minSdk</code> be, and how do we specify it?</p><p>If you look at the <code>compile_commands.json</code> generated by CMake above, you can notice a few details.</p><p><img loading=lazy src=/posts/programming/20231217_crosscompileandroidcpp/assets/7456927348234.png></p><p>The executable generated here is actually for armv7, and the Android SDK is 16, which is very ancient. In practice, Android specifies these details by passing parameters to the toolchain. The parameters you can pass are listed at the beginning of the toolchain file.</p><p><img loading=lazy src=/posts/programming/20231217_crosscompileandroidcpp/assets/097678678326478.png></p><p>For exactly how to pass them, you can refer to this page: <a href=https://developer.android.com/ndk/guides/cmake#variables>https://developer.android.com/ndk/guides/cmake#variables</a>.</p><p>For example, if we want the compiled instruction set to be armv8 and <code>minSdk</code> to be 31, we only need to add a few parameters in <code>CMakePresets</code>.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>  
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;version&#34;</span><span class=p>:</span> <span class=mi>5</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;configurePresets&#34;</span><span class=p>:</span> <span class=p>[</span>  
+</span></span><span class=line><span class=cl>        <span class=p>{</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;Android&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;displayName&#34;</span><span class=p>:</span> <span class=s2>&#34;Android&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;Build android&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;generator&#34;</span><span class=p>:</span> <span class=s2>&#34;Unix Makefiles&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;binaryDir&#34;</span><span class=p>:</span> <span class=s2>&#34;${sourceDir}/build/${presetName}&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;cacheVariables&#34;</span><span class=p>:</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>                <span class=nt>&#34;CMAKE_TOOLCHAIN_FILE&#34;</span><span class=p>:</span> <span class=s2>&#34;D:/Programmes/Android/ndk/android-ndk-r23c/build/cmake/android.toolchain.cmake&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>                <span class=nt>&#34;CMAKE_MAKE_PROGRAM&#34;</span><span class=p>:</span> <span class=s2>&#34;D:/Programmes/Android/ndk/android-ndk-r23c/prebuilt/windows-x86_64/bin/make.exe&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>                <span class=nt>&#34;ANDROID_PLATFORM&#34;</span><span class=p>:</span> <span class=s2>&#34;31&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>                <span class=nt>&#34;ANDROID_ABI&#34;</span><span class=p>:</span> <span class=s2>&#34;arm64-v8a&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>                <span class=nt>&#34;CMAKE_EXPORT_COMPILE_COMMANDS&#34;</span><span class=p>:</span> <span class=s2>&#34;1&#34;</span>  
+</span></span><span class=line><span class=cl>            <span class=p>}</span>  
+</span></span><span class=line><span class=cl>        <span class=p>}</span>  
+</span></span><span class=line><span class=cl>    <span class=p>],</span>  
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;buildPresets&#34;</span><span class=p>:</span> <span class=p>[</span>  
+</span></span><span class=line><span class=cl>        <span class=p>{</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;Android&#34;</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;configurePreset&#34;</span><span class=p>:</span> <span class=s2>&#34;Android&#34;</span>  
+</span></span><span class=line><span class=cl>        <span class=p>}</span>  
+</span></span><span class=line><span class=cl>    <span class=p>]</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><p>Then you can see that the target in <code>compile_commands.json</code> has changed.</p><p><img loading=lazy src=/posts/programming/20231217_crosscompileandroidcpp/assets/8963746578487.png></p></div><footer class=post-footer><ul class=post-tags><li><a href=https://keqing996.github.io/tags/cpp/>Cpp</a></li><li><a href=https://keqing996.github.io/tags/android/>Android</a></li></ul><nav class=paginav><a class=prev href=https://keqing996.github.io/posts/programming/20240912_unityjavaandjni/><span class=title>« Prev</span>
+<span>C#, Java, and Cpp Communication in Unity</span>
+</a><a class=next href=https://keqing996.github.io/posts/programming/20231016_arm64onandroid/><span class=title>Next »</span>
+<span>Using Arm64 Assembly on Android</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2026 <a href=https://keqing996.github.io/>BlueHour</a></span> ·
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top id=top-link class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey=g><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up"><polyline points="17 11 12 6 7 11"/><polyline points="17 18 12 13 7 18"/></svg>
+</a><script type=module>
+    const mermaidBlocks = document.querySelectorAll(".mermaid");
+    if (mermaidBlocks.length) {
+        const { default: mermaid } = await import("https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs");
+
+        const getMermaidMode = () => {
+            const theme = document.documentElement.dataset.theme;
+            if (theme === "dark") {
+                return "dark";
+            }
+            if (theme === "light") {
+                return "light";
+            }
+            return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        };
+
+        const mermaidThemes = {
+            light: {
+                background: "transparent",
+                primaryColor: "#eef6ff",
+                primaryTextColor: "#102033",
+                primaryBorderColor: "#3b82f6",
+                secondaryColor: "#eefcf6",
+                secondaryTextColor: "#102033",
+                secondaryBorderColor: "#10b981",
+                tertiaryColor: "#fff7ed",
+                tertiaryTextColor: "#102033",
+                tertiaryBorderColor: "#f59e0b",
+                mainBkg: "#f8fbff",
+                secondBkg: "#f3fbf7",
+                lineColor: "#64748b",
+                textColor: "#102033",
+                clusterBkg: "#f8fafc",
+                clusterBorder: "#cbd5e1",
+                edgeLabelBackground: "#ffffff",
+                fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                actorBkg: "#f8fbff",
+                actorBorder: "#3b82f6",
+                actorTextColor: "#102033",
+                actorLineColor: "#94a3b8",
+                signalColor: "#475569",
+                signalTextColor: "#102033",
+                noteBkgColor: "#fff7ed",
+                noteBorderColor: "#f59e0b",
+                noteTextColor: "#102033",
+                activationBkgColor: "#e0f2fe",
+                activationBorderColor: "#0284c7",
+                sequenceNumberColor: "#ffffff"
+            },
+            dark: {
+                background: "transparent",
+                primaryColor: "#172b45",
+                primaryTextColor: "#e5edf8",
+                primaryBorderColor: "#60a5fa",
+                secondaryColor: "#123527",
+                secondaryTextColor: "#e5edf8",
+                secondaryBorderColor: "#34d399",
+                tertiaryColor: "#3b2a18",
+                tertiaryTextColor: "#f8ead4",
+                tertiaryBorderColor: "#f59e0b",
+                mainBkg: "#111827",
+                secondBkg: "#10251d",
+                lineColor: "#94a3b8",
+                textColor: "#e5edf8",
+                clusterBkg: "#202226",
+                clusterBorder: "#475569",
+                edgeLabelBackground: "#1f2937",
+                fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+                actorBkg: "#172b45",
+                actorBorder: "#60a5fa",
+                actorTextColor: "#e5edf8",
+                actorLineColor: "#64748b",
+                signalColor: "#cbd5e1",
+                signalTextColor: "#e5edf8",
+                noteBkgColor: "#3b2a18",
+                noteBorderColor: "#f59e0b",
+                noteTextColor: "#f8ead4",
+                activationBkgColor: "#0f3a54",
+                activationBorderColor: "#38bdf8",
+                sequenceNumberColor: "#111827"
+            }
+        };
+
+        const getMermaidConfig = () => ({
+            startOnLoad: false,
+            theme: "base",
+            look: "classic",
+            securityLevel: "strict",
+            themeVariables: mermaidThemes[getMermaidMode()],
+            flowchart: {
+                curve: "basis",
+                htmlLabels: true,
+                nodeSpacing: 44,
+                padding: 18,
+                rankSpacing: 58
+            },
+            sequence: {
+                actorMargin: 72,
+                boxMargin: 8,
+                boxTextMargin: 6,
+                messageMargin: 44,
+                mirrorActors: false,
+                noteMargin: 14
+            }
+        });
+
+        const renderMermaidBlocks = async () => {
+            mermaid.initialize(getMermaidConfig());
+
+            for (const [index, block] of mermaidBlocks.entries()) {
+                const suffix = crypto.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+                const id = `mermaid-${index}-${suffix}`;
+                const source = block.dataset.mermaidSource || block.textContent.trim();
+                block.dataset.mermaidSource = source;
+                try {
+                    const { svg, bindFunctions } = await mermaid.render(id, source);
+                    block.innerHTML = svg;
+                    block.dataset.processed = "true";
+                    bindFunctions?.(block);
+                } catch (error) {
+                    block.dataset.processed = "error";
+                    console.error("Mermaid render failed:", error);
+                }
+            }
+        };
+
+        await renderMermaidBlocks();
+
+        document.getElementById("theme-toggle")?.addEventListener("click", () => {
+            window.setTimeout(renderMermaidBlocks, 0);
+        });
+
+        const colorSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        const renderAutoTheme = () => {
+            if (document.documentElement.dataset.theme === "auto") {
+                renderMermaidBlocks();
+            }
+        };
+
+        if (colorSchemeQuery.addEventListener) {
+            colorSchemeQuery.addEventListener("change", renderAutoTheme);
+        } else {
+            colorSchemeQuery.addListener(renderAutoTheme);
+        }
+    }
+</script><script>let menu=document.getElementById("menu");if(menu){const e=localStorage.getItem("menu-scroll-position");e&&(menu.scrollLeft=parseInt(e,10)),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}}document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var toplink=document.getElementById("top-link");window.onscroll=function(){const e=window.innerHeight;document.body.scrollTop>e||document.documentElement.scrollTop>e?toplink.classList.remove("hidden"):toplink.classList.add("hidden")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{const e=document.querySelector("html");e.dataset.theme==="dark"?(e.dataset.theme="light",localStorage.setItem("pref-theme","light")):(e.dataset.theme="dark",localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="copy";function s(){t.innerHTML="copied!",setTimeout(()=>{t.innerHTML="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
